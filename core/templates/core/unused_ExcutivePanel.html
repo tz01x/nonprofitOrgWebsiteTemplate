@@ -1,0 +1,236 @@
+{%extends 'core/index.html'%}
+{%load static%}
+{%include 'navbar.html'%}
+{%block body%}
+<style>
+    .leadingImage{
+width: 100%;
+height: 170px;
+border-radius: 0px;
+background-image: url("{%static 'img/pubing.svg'%}");
+background-origin: content-box;
+    background-position: center;
+    background-size: cover;
+    /* background-repeat: round*/
+}
+.leadingImage-text{
+font-family: var(--font_family);
+color: white;
+font-size: 50px;
+font-style: normal;
+font-weight: 500;
+line-height: 59px;
+letter-spacing: 0em;
+text-align: left;
+
+padding-top: 4%;
+
+}
+.font-40{
+font-family: var(--font_family);
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 47px;
+
+color: #000000;
+}
+
+.greenbar{
+width: 4px;
+height: 45px;
+background: #45BF55;
+margin:35px auto 30px  auto; 
+/* t r b l */
+}
+.c-b{
+    background-color: black;
+}
+.c-blue{
+    background-color: rgb(16, 36, 216);
+}
+.c-p{
+    background-color: rgb(216, 16, 206);
+}
+.c-c{
+    background-color: rgb(16, 216, 206);
+}
+.c-r{
+    background-color: rgb(201, 8, 8);
+}
+.c-g{
+    background-color: rgb(36, 196, 84);
+}
+
+/* event btn */
+.btn-center{
+    display: flex;
+    justify-content: center;
+}
+.event-btn{
+width: 278px;
+height: 71px;
+border: 0;
+
+background: var(--secondary);
+border-radius: 10px;
+}
+.event-btn:hover {
+    background: var(--primary);
+}
+.event-btn > a {
+    text-decoration: none;
+    color: white;
+    font-style: normal;
+font-weight: 500;
+font-size: 23px;
+line-height: 27px;
+}
+.event-btn :checked{
+    border: 0;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css" integrity="sha256-EqzwzekQXKNbB5EE4nNBQT+2gWQIWRZQXAd89YdIq8M=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide-core.min.css" integrity="sha256-XyY0okd1iYtK9Q8WBJ3HnJtNgJPS5UGv7E4qTBsbA/8=" crossorigin="anonymous">
+
+
+<div class="leadingImage">
+    <div class="container pdd-lr leadingImage-text">
+        Excutive panel
+    </div>
+ </div>
+ 
+ <div class="greenbar"></div>
+ 
+ <div class="container ">
+     <div class="text-center font-40">Excutive panel</div>
+ </div>
+<section class="container mt-3">
+
+    <h3>Event Name</h3>
+
+<div class="splide s-gallery">
+	<div class="splide__track">
+		<ul class="splide__list">
+			<li class="splide__slide c-b">Slide 01</li>
+			<li class="splide__slide c-r">Slide 02</li>
+			<li class="splide__slide c-g">Slide 03</li>
+			<li class="splide__slide c-p">Slide 03</li>
+			<li class="splide__slide  c-c">Slide 03</li>
+			<li class="splide__slide c-blue">Slide 03</li>
+			<li class="splide__slide c-b">Slide 03</li>
+			<li class="splide__slide c-r">Slide 03</li>
+			<li class="splide__slide c-g">Slide 03</li>
+			<li class="splide__slide c-r">Slide 03</li>
+			<li class="splide__slide c-c">Slide 03</li>
+			<li class="splide__slide c-r">Slide 03</li>
+			<li class="splide__slide c-b">Slide 03</li>
+			<li class="splide__slide c-r">Slide 03</li>
+		</ul>
+	</div>
+</div>
+
+</section>
+
+<section class="container mt-4 events-titles">
+
+    <div class="splide event-titls">
+        <div class="splide__track">
+            <ul class="splide__list">
+                {%for i in 1234567891011|make_list%}
+                <li class="splide__slide btn-center"> 
+                    <button class="event-btn">
+                        <a href="">Event {{i}}</a>
+                    </button>
+                </li>
+                {%endfor%}
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js" integrity="sha256-SmCcbf/1ehhlBnw3ZGinNu6fjQV471LDBjc4yMMJhsk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-grid@0.2.0/dist/js/splide-extension-grid.min.js" integrity="sha256-TF7FJ/F91hG2Y0namipwOMudTVXjCO9xsrVZ6//m3Zw=" crossorigin="anonymous"></script>
+ <script>
+    
+	new Splide( '.s-gallery',{
+        focus    : 'center',
+    cover  : true,
+
+    arrows:false,
+	// perPage: 2,
+    rewind : true,
+    height: '60vh',
+ 
+    grid       : {
+        rows:2,
+        cols:3,
+		// You can define rows/cols instead of dimensions.
+		// dimensions: [ [ 1, 1 ], [ 2, 2 ]], //fist slide contain row 1 and col 1 and 2nd slide contain 2rows and 2cols
+		gap: {
+			row: '26px',
+			col: '26px',
+        },
+	},
+	breakpoints: {
+		600: {
+			height : '10rem',
+			perPage: 1,
+			grid   : {
+                rows:1,
+                cols:1,
+				// dimensions: [ [ 2, 2 ], [ 1, 1 ], [ 2, 1 ], [ 1, 2 ], [ 2, 2 ] ],
+			}
+		}
+	},
+
+    } ).mount(window.splide.Extensions);
+    
+    // event titles
+    new Splide('.event-titls',{
+        focus    : 'center',
+        cover  : true,
+    arrows:false,
+    pagination: false,
+	// perPage: 2,
+    rewind : true,
+    grid       : {
+        rows:3,
+        cols:3,
+		// You can define rows/cols instead of dimensions.
+		// dimensions: [ [ 1, 1 ], [ 2, 2 ]], //fist slide contain row 1 and col 1 and 2nd slide contain 2rows and 2cols
+		gap: {
+			row: '33px',
+			col: '33px',
+        },
+        
+	},
+    breakpoints: {
+		600: {
+			
+			
+			grid   : {
+                rows:1,
+                cols:1,
+				// dimensions: [ [ 2, 2 ], [ 1, 1 ], [ 2, 1 ], [ 1, 2 ], [ 2, 2 ] ],
+			}
+		}
+	},
+
+    }).mount(window.splide.Extensions)
+
+    // for more splide option visite https://splidejs.com/options/
+</script>
+
+{%endblock body%}
+{%include 'footer.html'%}

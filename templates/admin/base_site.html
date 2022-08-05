@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+
+{%load static%}
+
+{% block branding %}
+
+<style>
+    .site-name {
+        background: white;
+    border-radius: 20px;
+    height: 110px;
+    width: 147px;
+    border: 3px solid white;
+    }
+
+    .site-logo {
+        width: 100%;
+    height: 100%;
+    object-fit: contain;
+    }
+</style>
+{%if clubinfo and clubinfo.logo%}
+<h1 id="site-name" class="site-name">
+    <a href="{% url 'admin:index' %}" style="width: 100%;height: 100%;">
+
+        <img src="{{clubinfo.logo.url}}" class="site-logo" alt="" srcset="">
+       
+    </a>
+</h1>
+{%else%}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" style="width: 100%;height: 100%;">
+
+        Admin Potal
+       
+    </a>
+</h1>
+
+
+{%endif%}
+{% endblock %}

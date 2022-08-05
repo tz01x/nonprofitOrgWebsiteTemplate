@@ -1,0 +1,48 @@
+{%load static%}
+
+<style>
+    .intro-pics {
+
+        /* margin-top: 2%; */
+
+        background: url('{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%else%} {%static "img/2_35__1.png"%} {%endif%}  ');
+        /* width: 101%; */
+        height: 65vh;
+        /* aspect-ratio: 2.35/1; */
+
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+
+
+
+    }
+
+    @media only screen and (max-width: 990px) {
+        .intro-pics {
+            object-fit: contain;
+            height: 30vh;
+
+            margin-top: 0;
+
+        }
+    }
+    /*Big smartphones [426px -> 600px]*/
+    @media only screen and (max-width: 600px) {
+
+        .intro-pics {
+            object-fit: contain;
+            height: 15vh;
+            margin-top: 0;
+
+        }
+
+    }
+</style>
+
+
+<div class="intro-pics " >
+
+</div>

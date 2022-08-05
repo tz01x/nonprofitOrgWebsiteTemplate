@@ -1,0 +1,333 @@
+{%load static%}
+
+<style>
+    .last_news {
+        position: relative;
+        background: url('{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%else%} {%static "img/2_35__1.png"%} {%endif%}');
+
+        min-height: 80vh;
+
+        background-position: center;
+        background-size: cover;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+
+    }
+
+
+
+    .single_slide {
+
+        /* background: #FFFFFF; */
+        /* background-image: url(/static/img/white-bg.png); */
+        background-size: 80%;
+        background-repeat: repeat-y;
+        /* background-attachment: fixed; */
+        background-position-x: right;
+        border-radius: 0%;
+        border: none;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        /* width: 85%; */
+        padding: 0;
+        transform: translateX(6em);
+
+
+    }
+
+
+    .news-img {
+
+        /* border-radius: 22px; */
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
+
+    .news-img>img {
+
+        width: 100%;
+        height: 100%;
+        border-radius: 6%;
+        object-fit: cover;
+        padding: 0;
+    }
+
+    .news-text-section {
+        width: 80%;
+
+        background: white;
+        padding-left: 7%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        border-radius: 29px;
+        margin-left: 10px;
+        min-height: 43vh;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .news-text-section {
+            width: 71%;
+            padding-left: 7%;
+        }
+    }
+
+    @media only screen and (max-width: 991px) {
+
+        .single_slide {
+            width: 100%;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 20px;
+            transform: translateX(0em);
+        }
+
+        .news-img {
+            margin-top: 5%;
+            align-self: center;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            left: 0;
+            top: 0;
+            transform: translateY(0);
+
+        }
+        .news-text-section {
+            width: 100%;
+           padding:0;
+           background-color: transparent;
+        }
+    }
+
+
+    @media only screen and (max-width: 600px) {
+
+
+        .last_news {
+
+            min-height: 100vh;
+
+        }
+
+     
+
+    
+
+    }
+
+
+    .news-overray-black {
+
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.432);
+        z-index: -10;
+        width: 100%;
+
+        height: 100%;
+    }
+
+    .news_item_title {
+
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 27px;
+        line-height: 47px;
+        /* identical to box height */
+
+        text-transform: uppercase;
+
+        text-align: center;
+
+    }
+    .news_item_title > a {
+        color: white;
+    }
+
+
+
+    .news-date {
+
+
+      
+        font-size: 17px;
+  
+        display: flex;
+        align-items: center;
+
+    }
+
+    .news-date>svg {
+        margin-right: 10px;
+    }
+
+    .news-title {
+
+        font-family: var(--font_family);
+
+        margin-bottom: 0;
+        color: var(--primary);
+
+    }
+
+    .news-discription {
+        font-family: var(--font_family);
+        font-size: 1.2rem;
+        color: #000000;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+
+        .news_item_title {
+
+            font-size: 25px;
+            margin-top: 8%;
+        }
+
+        .news-title {
+
+            font-size: 18px;
+            font-weight: 600;
+
+
+        }
+
+        .news-date {
+            font-size: 10px;
+
+        }
+    }
+
+    .cstome-pg {
+        background:  rgb(241, 241, 241) !important;
+    }
+
+    .splide__pagination__page.cstome-pg.is-active {
+        background: rgb(54, 141, 255) !important;
+        border-radius: 0;
+        width: 6px;
+        height: 15px;
+        border-top-right-radius: 4px !important;
+        border-top-left-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+    }
+</style>
+
+<!-- last_news -->
+<section class="last_news mt-5">
+    <div class="news-overray-black">
+    </div>
+    <div class="container">
+        <h2 class="news_item_title mt-5">
+            <a href="/news/">
+                LATEST NEWS
+            </a>
+        </h2>
+        <div class="splide news-sliders">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {%for news in lastnews%}
+                    <li class="splide__slide row justify-content-center align-items-center">
+
+                        <div class=" single_slide ">
+
+
+                            <div class="  row justify-content-center align-items-center news-img">
+
+                                <img class="" src="{%if news.picture %}{{news.picture.url}}{%endif%}" alt="img">
+
+
+                            </div>
+                            <article class="row justify-content-center news-text-section">
+                                <div class="news-date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                        class="bi bi-calendar-week" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                        <path
+                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                    </svg>
+                                    {{news.created}}
+                                </div>
+
+
+                                <h3 class="news-title">
+                                    <a href="#">
+                                    {{news.title}}
+                                    </a>
+                                </h3>
+                                <p class="news-discription" >
+                                    {{news.content}}
+                                </p>
+
+
+                            </article>
+
+
+                        </div>
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"
+    integrity="sha256-SmCcbf/1ehhlBnw3ZGinNu6fjQV471LDBjc4yMMJhsk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-grid@0.2.0/dist/js/splide-extension-grid.min.js"
+    integrity="sha256-TF7FJ/F91hG2Y0namipwOMudTVXjCO9xsrVZ6//m3Zw=" crossorigin="anonymous"></script>
+
+
+<script>
+
+
+    new Splide('.news-sliders', {
+        focus: 'center',
+
+        cover: true,
+        autoplay: true,
+        perPage: 1,
+        type: 'loop',
+        direction: 'ttb',
+
+
+
+        arrows: true,
+        rewind: true,
+        height: '70vh',
+        gap: '1rem',
+        // autoHeight:true,
+
+
+
+        breakpoints: {
+            990: {
+
+                height: '100vh',
+                perPage: 1,
+
+            }
+        },
+        classes: {
+            page: 'splide__pagination__page cstome-pg', // each button
+        }
+
+    }).mount();
+</script>

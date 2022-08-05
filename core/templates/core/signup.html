@@ -1,0 +1,631 @@
+{% extends 'core/index.html' %}
+{%load static %}
+
+{%block metatag%}
+
+
+
+<meta name="title" content="Join US today! - {{clubinfo.sort_name}}">
+<meta name="description" content="{{clubinfo.meta_description}}">
+
+
+
+<meta property="og:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+<meta property="og:title" content="Join US today! - {{clubinfo.sort_name}}">
+<meta property="og:description" content="{{clubinfo.meta_description}}">
+
+<meta name="twitter:card" content="app">
+<meta name="twitter:title" content="Join US today! - {{clubinfo.sort_name}}">
+<meta name="twitter:description" content="{{clubinfo.meta_description}}">
+<meta name="twitter:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+<title>Registration Form - {{clubinfo.sort_name}}</title>
+
+{%endblock%}
+
+
+{%block body%}
+
+
+
+<style>
+    /**signup page*/
+
+    .dropdown-menu{
+        background-color: var(--secondary) !important;
+    }
+
+    .pageTitle {
+        font-family: var(--font_family);
+
+        font-style: normal;
+        font-weight: 500;
+        font-size: 40px;
+        line-height: 47px;
+        /* identical to box height */
+
+
+        /* Club accent color */
+
+        color: var(--primary) !important;
+    }
+
+    .pageContex {
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 25px;
+        line-height: 29px;
+        color: var(--secondary);
+    }
+
+    .signup-form {
+        padding-right: 9%;
+        padding-left: 9%;
+        margin-left: 10%;
+        margin-right: 7%;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        /*Big smartphones [426px -> 600px]*/
+        .signup-form {
+            padding-right: 0%;
+            padding-left: 0%;
+            margin-left: 0%;
+            margin-right: 0%;
+        }
+    }
+
+    .form-field-text {
+        width: 100%;
+
+        padding: 10PX;
+
+        background: #F7F7F7;
+        border: 0px;
+
+
+
+
+
+
+    }
+
+    .input-field-sharrow {
+        box-shadow: 0px 1px 5px -2px #000000a6;
+
+        border-radius: 8px;
+    }
+
+    .img-upload {
+        width: 256px;
+        height: 256px;
+
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+
+        background: #FFFFFF;
+        box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .form-label-text {
+
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #3E3E3E;
+        margin-top: 20px;
+    }
+
+    .form-invalid {
+        color: red;
+        font-size: small;
+    }
+
+    .form-fields {
+        margin-top: 26px;
+    }
+
+    .form-label-check {
+
+
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 17px;
+        line-height: 24px;
+
+        color: #3E3E3E;
+    }
+
+    .form_socal_icon {
+        /* width: 8.33%; */
+        background: #F7F7F7;
+        border: 1.5px solid #F7F7F7;
+        box-sizing: border-box;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        /*Tablets [601px -> 1200px]*/
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        /*Big smartphones [426px -> 600px]*/
+        .form_socal_icon {
+            width: 18.33%;
+            background-color: white;
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        /*Small smartphones [325px -> 425px]*/
+    }
+
+    .form_socal_input_text {
+        width: 100%;
+        height: 55px;
+
+        border: 0px;
+        background: #FFFFFF;
+        border: 1px solid #DDD9D9;
+        box-sizing: border-box;
+        border-radius: 6px;
+    }
+
+    .signup_form_submit {
+        width: 100%;
+        height: 59px;
+        background: var(--primary);
+        border-radius: 6px;
+        border: 0;
+
+        font-family: var(--font_family);
+        ;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 23px;
+
+        color: #FFFFFF;
+    }
+
+    .dropdown {
+
+
+        width: 100% !important;
+    }
+
+
+    .form-control {
+    line-height: 1.6 !important;
+    }
+    .preview_up_img{
+        width: 85%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    }
+</style>
+
+
+<section class="container" style="margin-top: 48px;">
+    <div class="pageTitle text-center">Join us</div>
+    <div class="pageContex text-center">Registration Form</div>
+</section>
+<section class="container position-relative" style="min-height: 100vh; ">
+
+
+        
+        {%if clubinfo.registation_form_open%}
+        {{message}}
+        <form class="signup-form" action="" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <label class="form-label-text" for="useranme">Name*</label>
+                    <br>
+                    <input type="text" class="form-field-text input-field-sharrow" name="name" value="{%if form.name.value%}{{form.name.value}}{%endif%}"  id="useranme">
+                    {%if form.name.errors%}
+
+                    <div id="name-form-validity" class="form-valid form-invalid">
+                        {{form.name.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <label class="form-label-text" for="email">Email*</label>
+                    <br>
+                    <input type="email" class="form-field-text input-field-sharrow" name="email" value="{%if form.email.value%}{{form.email.value}}{%endif%}" id="email">
+
+                    {%if form.email.errors%}
+
+                    <div id="email-form-validity" class="form-valid form-invalid">
+                        {{form.email.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+            </div>
+
+    
+
+            <div class="row  form-fields">
+
+                <div class="col-sm-6">
+                    <label class="form-label-text" for="university_id">University ID*</label>
+                    <br>
+                    <input type="text" class="form-field-text input-field-sharrow" name="university_id" value="{%if form.university_id.value%}{{form.university_id.value}}{%endif%}"
+                        id="university_id" max="10" >
+
+
+
+
+                    {%if form.university_id.errors%}
+
+                    <div id="university_id-form-validity" class="form-valid form-invalid">
+                        {{form.university_id.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label class="form-label-text" for="department">Department*</label>
+                    <br>
+                   
+
+                    <select class="selectpicker input-field-sharrow "  value="{%if form.department.value%}{{form.department.value}}{%endif%}" data-selected-text-format="count > 3"
+                        name="department">
+
+                        {%for choice in form.department.field.widget.choices%}
+                        <option value="{{choice.0}}" {%if choice.0 in form.department.value %} selected {%endif%}>
+                            {{choice.1}}</option>
+                        {%endfor%}
+
+
+
+                    </select>
+
+
+                    {%if form.department.errors%}
+
+                    <div id="department-form-validity" class="form-valid form-invalid">
+                        {{form.department.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+                
+
+            </div>
+
+
+            <div class="row  form-fields">
+                <div class="col-sm-8">
+                    <label class="form-label-text" for="profilePicture">Upload Image*</label>
+                    <br>
+                    <input type="file" id="id_images" class="form-control input-field-sharrow" name="picture" value="{%if form.picture.value%}{{form.picture.value}}{%endif%}"
+                        accept="image/x-png,image/jpeg">
+                    {%if form.picture.errors%}
+
+                    <div id="picture-form-validity" class="form-valid form-invalid">
+                        {{form.picture.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+                <div class="col-sm-4 img-upload text-center  d-flex align-items-center justify-content-center"
+                    id="selected_images">
+                    preview
+                </div>
+
+
+
+            </div>
+
+            <div class="row form-fields">
+                <div class="col-sm-12">
+                    <label class="form-label-text" for="phone">Phone Number*</label>
+                    <br>
+                    <input type="text" class="form-field-text input-field-sharrow" name="phone" value="{%if form.phone.value%}{{form.phone.value}}{%endif%}" id="phone">
+                    {%if form.phone.errors%}
+
+                    <div id="phone-form-validity" class="form-valid form-invalid">
+                        {{form.phone.errors}}
+                    </div>
+
+                    {%endif%}
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="row form-fields">
+                        <div class="col-sm-12">
+                            <label class="form-label-text" for="blood_group">Blood Group*</label>
+                            <br>
+                            <select class="selectpicker input-field-sharrow " data-selected-text-format="count > 3"  value="{%if form.bloodGroup.value%}{{form.bloodGroup.value}}{%endif%}"
+                                name="bloodGroup">
+
+                                {%for choice in form.bloodGroup.field.widget.choices%}
+                                <option value="{{choice.0}}" {%if choice.0 in form.bloodGroup.value %} selected
+                                    {%endif%}>{{choice.1}}</option>
+                                {%endfor%}
+
+
+
+                            </select>
+                            {%if form.bloodGroup.errors%}
+
+                            <div id="blood_group-form-validity" class="form-valid form-invalid">
+                                {{form.bloodGroup.errors}}
+                            </div>
+
+                            {%endif%}
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+
+
+                    <div class="row form-fields">
+
+                        <div class="col-sm">
+                            <label class="form-label-text" for="skills">Skills*</label>
+                            <br>
+
+
+                            <select class="selectpicker input-field-sharrow" name="skill" multiple value="{%if form.skill.value%}{{form.skill.value}}{%endif%}" required
+                                data-selected-text-format="count > 3">
+
+                                {%for choice in form.skill.field.widget.choices%}
+                                <option value="{{choice.0}}" {%if choice.0 in form.skill.value %} selected {%endif%}>
+                                    {{choice.1}}</option>
+                                {%endfor%}
+
+                            </select>
+
+                            {%if form.skill.errors%}
+
+                            <div id="blood_group-form-validity" class="form-valid form-invalid">
+                                {{form.skill.errors}}
+                            </div>
+
+                            {%endif%}
+
+                            <!-- <div class="form-check">
+                        <input class="form-check-input" name="skill_grapicdesiginer" type="checkbox"
+                            value="grapic_desiginer" id="skill_grapicdesiginer">
+                        <label class="form-label-check" for="skill_grapicdesiginer">
+                            Grapic design
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="skill_webdesign" type="checkbox" value="web_design"
+                            id="skill_webdesign">
+                        <label class="form-label-check" for="skill_webdesign">
+                            Web design
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="skill_motiongrapic" type="checkbox" value="motion_grapic"
+                            id="skill_motiongrapic">
+                        <label class="form-label-check" for="skill_motiongrapic">
+                            Motion grapic
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="skill_shopily" type="checkbox" value="shopily"
+                            id="skill_shopily">
+                        <label class="form-label-check" for="skill_shopily">
+                            Shopily
+                        </label>
+                    </div> -->
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="row form-fields">
+                <label class="form-label-text" for="">Social</label>
+                <div class="col-sm-12 mt-2">
+
+                    <div class="input-group mb-3  input-field-sharrow">
+                        <span class="input-group-text" id="inputGroup-sizing-FACEBOOK"  
+                            data-bs-toggle="tooltip" data-bs-placement="left" title="facebook profile link">
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-facebook" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                            </svg>
+
+                        </span>
+                        <input type="text" class="form-control" name="facebook_profile_url" value="{%if form.facebook_profile_url.value%}{{form.facebook_profile_url.value}}{%endif%}" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-FACEBOOK">
+                    </div>
+
+
+
+                    <div class="input-group mb-3  input-field-sharrow">
+                        <span class="input-group-text" id="inputGroup-sizing-linkedin"
+                        
+                            data-bs-toggle="tooltip" data-bs-placement="left" title="Linkedin profile link">
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-linkedin" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                            </svg>
+
+                        </span>
+                        <input type="text" name="linkin_url" class="form-control"   value="{%if form.linkin_url.value%}{{form.linkin_url.value}}{%endif%}" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-linkedin">
+                    </div>
+
+                    <div class="input-group mb-3  input-field-sharrow">
+                        <span class="input-group-text" id="inputGroup-sizing-linkedin" 
+                            data-bs-toggle="tooltip" data-bs-placement="left" title="portfolio website link">
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-globe2" viewBox="0 0 16 16">
+                                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                              </svg>
+
+                        </span>
+                        <input type="text" name="portfolio_url" class="form-control"   value="{%if form.portfolio_url.value%}{{form.portfolio_url.value}}{%endif%}" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-linkedin">
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class=" form-fields mx-2">
+
+                <div class="form-check">
+                    <input class="form-check-input" name="accepet_termsandconditions" type="checkbox" value="" id="flexCheckDefault" required>
+                    <label class="form-check-label" for="flexCheckDefault">
+                        By registering on this website you are accepting your <a href="{%url 'core:termsandconditions'%}">{{termsandcondition}}</a>
+                        .
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3"></div>
+            <div>
+                <input class="signup_form_submit" type="submit" value="Submit">
+            </div>
+
+
+
+
+        </form>
+        {%else%}
+        <div class="text-center fs-1 position-absolute  " style="top: 35%; left: 51%; transform: translate(-50%,-50%);">
+
+            Registration Is Close For Now.
+
+
+        </div>
+        {%endif%}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+</section>
+
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+
+<!-- bootstrap-select -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+<script>
+
+    $('select').selectpicker();
+</script>
+
+<script>
+
+
+    ///priview img file
+
+  
+
+        const ele = document.getElementById('id_images');
+
+
+
+        if (ele) {
+
+            ele.addEventListener('change', (e) => {
+
+                selected_images_ele = document.getElementById('selected_images');
+                selected_images_ele.innerHTML = '';
+                for (let index = 0; index < e.srcElement.files.length; index++) {
+                    let file = e.srcElement.files[index];
+                    console.log(file.size);
+                    if (file.size > 2200000) {
+
+                        alert('file is to big, upload picture equal or less then 2MB');
+
+                        ele.value = '';
+                        break;
+
+
+                    }
+                    let reader = new FileReader();
+                    reader.addEventListener("load", function () {
+                        // convert image file to base64 string
+                        // console.log(reader);
+                        selected_images_ele.innerHTML += `<img src="${reader.result}" class="preview_up_img" alt="" srcset="">`;
+                    }, false);
+                    reader.readAsDataURL(file);
+                }
+
+
+
+            });
+
+        }
+
+    
+</script>
+
+<!-- bootstrap-select -->
+{%endblock body%}

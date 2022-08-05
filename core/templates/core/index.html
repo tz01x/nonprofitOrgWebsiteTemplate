@@ -1,0 +1,857 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{%static 'favicon.ico'%}" type="image/x-icon">
+    <link rel="icon" href="{%static 'favicon.ico'%}" type="image/x-icon">
+
+    {%block metatag%}
+
+    <meta name="title" content="{{clubinfo.meta_title}}">
+    <meta name="description" content="{{clubinfo.meta_description}}">
+
+
+
+    <meta property="og:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+    <meta property="og:title" content="{{clubinfo.meta_title}}">
+    <meta property="og:description" content="{{clubinfo.meta_description}}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{clubinfo.meta_title}}">
+    <meta name="twitter:description" content="{{clubinfo.meta_description}}">
+    <meta name="twitter:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+
+    <title>{{clubinfo.meta_title}}</title>      
+
+    {%endblock%}
+    <meta name="keywords" content="{{clubinfo.sort_name}},ewu,lastcoders,east,west,university">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="https://bit.ly/3vjhQ7m" />
+    <meta name="publisher" content="Lastcoders">
+
+
+
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <!-- font -->
+    {{clubinfo.get_font_links}}
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+
+    {{clubinfo.loadtheam|safe}}
+
+
+</head>
+
+
+
+<body>
+
+    {%include 'navbar.html'%}
+
+
+    {%block body%}
+
+    <style>
+        .club-discribtion {
+            background-size: contain;
+
+            margin-left: 27px;
+            margin-top: 0;
+        }
+
+
+
+
+
+        .info {
+            min-height: 70vh;
+        }
+
+     
+
+        /*Big smartphones [426px -> 600px]*/
+        @media only screen and (max-width: 600px) {
+            .club-discribtion {
+                margin-left: 0%;
+            }
+
+            .club-info-title {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+
+
+
+        }
+
+        .status {
+            background-color: var(--secondary);
+            color: var(--text_in_secondary);
+            min-height: 270px;
+            padding: 19px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .status-num {
+
+            font-weight: bold;
+            font-size: xx-large;
+            line-height: 70px;
+        }
+
+        .status-text {
+
+            font-weight: 500;
+            font-size: x-large;
+            line-height: 23px;
+            text-transform: uppercase;
+        }
+
+        .affilates_box {
+            user-select: none;
+
+            width: 150px;
+            height: 150px;
+
+
+
+            background: rgb(255, 255, 255);
+            /* Drop Shadow */
+
+            filter: drop-shadow(0px 4px 4px rgba(48, 48, 48, 0.25));
+            border-radius: 10px;
+
+            overflow: hidden;
+
+
+        }
+
+        .affilates_img {
+            user-select: none;
+            width: 100%;
+            height: inherit;
+            object-fit: contain;
+            /* padding: 10px; */
+        }
+
+        .getintouch {
+            background-color: var(--gray);
+            ;
+        }
+
+        .form-control {
+            border: 1px solid #000000;
+        }
+
+        .card-img-top {
+
+            object-fit: contain;
+            width: 100%;
+            height: 32vh;
+        }
+        .why_join_description{
+            padding-bottom: 2px;
+            font-weight: 500;
+            color: black;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+
+        /* blogs and atrical pagination */
+
+        .blogs_and_article_slide_pagination{
+            bottom: -1.5em !important;
+
+        }
+
+        /* last event pagination */
+        .transform_down_105{
+
+            bottom: -1.5em !important;
+        }
+
+        
+        .pagination_page_color_seconday{
+            background-color: var(--secondary) !important;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css"
+        integrity="sha256-EqzwzekQXKNbB5EE4nNBQT+2gWQIWRZQXAd89YdIq8M=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide-core.min.css"
+        integrity="sha256-XyY0okd1iYtK9Q8WBJ3HnJtNgJPS5UGv7E4qTBsbA/8=" crossorigin="anonymous">
+
+
+
+    {%include 'core/components/intro_slider.html' %}
+
+
+    <div class="bluebar-x" style="background-color:var(--secondary) ;" data-aos="fade-up" data-aos-duration="300"></div>
+
+
+    <!-- club info  -->
+    <section class="container info mt-5">
+        <div class="row " style="    justify-content: center;">
+            <div class="col-sm col-lg-4 row justify-content-center p-0 my-lg-1 " style=" height: 100%; width: 250px;  "
+                data-aos="fade-right" data-aos-delay="900">
+                <img class="" src="{%if clubinfo and clubinfo.logo%}{{clubinfo.logo.url}}{%endif%}" style="object-fit: cover; " alt="" srcset="">
+            </div>
+            <div class="col-sm col-lg-8 ">
+                <div class="club-discribtion">
+                    <h1 class="club-info-title" style="color:var(--primary);    font-weight: 700;">
+                        {%if clubinfo %}
+                        {{clubinfo.name}}
+                        {%endif%}
+                    </h1>
+                    <div data-aos="fade-down" data-aos-delay="300" data-aos-easing="ease-out-cubic">
+                        {%if clubinfo %}
+                        {{clubinfo.description|safe}}
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- last news -->
+
+    {%include 'core/components/news_slider_old.html'%}
+  
+
+    <div class="greenbar" style="background-color:var(--secondary) ;" data-aos="fade-up" data-aos-duration="300"></div>
+
+    <!-- last event -->
+    <section class="mt-5 h-auto  p-3 d-flex flex-column justify-content-evenly" style="min-height: 50vh; ">
+        <h2 class="text-center  p-2"
+            style="font-weight: 700;font-family: var(--font_family);font-size: 35px; color: inherit; ">
+            Latest Event
+        </h2>
+
+
+
+        <div class="splide   last_Events container">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    <style>
+                        .event_card {
+
+                            position: relative;
+                            width: 85%;
+                            height: 256px;
+                            overflow: hidden;
+                            border-radius: 20px;
+
+
+                        }
+
+                        .event_card_picture {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            overflow: hidden;
+                            z-index: -2;
+
+                            transform: scale(1);
+
+                            transition: transform 1s;
+
+
+
+                        }
+
+                        .bg_img_overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: -1 !important;
+
+                            background-color: rgba(35, 35, 35, 0.637);
+
+                            transition: background-color 500ms;
+
+
+                        }
+
+                        .bg_img_overlay_hover:hover {
+                            background-color: rgba(8, 8, 8, 0.884);
+
+                        }
+
+
+                        .event_card_text {
+
+
+
+                                /* word-break: break-all; */
+                                position: relative;
+                                top: 10%;
+                                width: 100%;
+                               
+                                font-size: larger;
+                                font-weight: 900;
+                                z-index: 10;
+                                color: white;
+                                text-overflow: ellipsis;
+                    
+                                letter-spacing: 1px;
+
+
+                        }
+
+                        .event_card_text:hover {
+                            color: rgba(255, 255, 255, 0.863);
+                            /* transform: scale(1.1) translateY(-50%); */
+                        }
+
+                        .event_card:hover>.event_card_picture {
+
+                            transform: scale(1.2);
+
+                        }
+                    </style>
+
+                    {%for obj in events%}
+                    <li class="splide__slide  d-flex justify-content-center ">
+                        <!-- <img src="preview01.jpg"> -->
+
+
+
+                        <div class="event_card">
+
+                            <img src="media/{{obj.picture}}" class="event_card_picture" alt="pic" srcset="">
+                            <div class="bg_img_overlay bg_img_overlay_hover"></div>
+                            <a class="event_card_text text-decoration-none " href="{%url 'core:event' slug=obj.slug%}">
+                                
+                                <p style=" padding-left: 1.5rem;">{{obj.title}}</p>
+                            </a>
+
+                        </div>
+
+
+
+                    </li>
+                    {%endfor%}
+
+                </ul>
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- What we did -->
+    <section class="mt-5 h-auto  p-3 d-flex flex-column justify-content-center"
+        style="min-height: 95vh; background-color: var(--secondary); color:var(--text_in_secondary); position: relative; z-index: 10;">
+        <div class="bg_img_overlay"></div>
+
+        <div class="greenbar-x" style="background-color:var(--text_in_secondary) ;" data-aos="fade-up"
+            data-aos-duration="300"></div>
+        <h2 class="text-center  p-2 mb-2"
+            style="font-weight: 700;font-family: var(--font_family);font-size: 35px; color: inherit; ">
+            What We Did
+        </h2>
+
+
+
+        <div class="splide  video-slider">
+            <div class="splide__track" style="padding:64px 0;">
+                <ul class="splide__list">
+
+
+                    {%for obj in whatwedid%}
+                    <li class="splide__slide sliderViewwindow row justify-content-center">
+                        <!-- <img src="preview01.jpg"> -->
+
+
+                        <iframe style="aspect-ratio: 16/9;"
+                            src="https://www.youtube.com/embed/{{obj.youtube_link_embed}}" allowfullscreen></iframe>
+                    </li>
+                    {%endfor%}
+
+                </ul>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!--   Blog and Article -->
+    <section class="container  mt-5">
+        <h2 class="text-center"
+            style="font-weight: 700;font-family: var(--font_family);font-size: 40px; color: var(--primary);">
+            Articles
+        </h2>
+
+        <div class="splide blogs_articles_slides mt-4">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {%for blogAndArticle in blogsAndarticles%}
+
+                    <li class="splide__slide row justify-content-center">
+                        <div class="card p-0" style="width: 308px;">
+                            <img src="{%if blogAndArticle.picture %}{{ blogAndArticle.picture.url}}{%endif%}"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title " style="
+                             
+                                
+                                font-weight: 600;
+                                font-size: 19px;
+                                 
+                              ">
+                                    <a href="{{blogAndArticle.get_absolute_url}}">
+                                        {{blogAndArticle.title}}
+
+                                    </a>
+                                </h5>
+                                <p class="card-text" style="
+                                    font-weight: normal;
+                                    font-size: 15px;
+                                    line-height: 30px;
+                            
+
+                                    text-align: justify;
+                              ">
+
+                                    {{blogAndArticle.shortDescription}}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {{blogAndArticle.created}}
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    {%endfor%}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="bluebar-x" data-aos="fade-up" data-aos-duration="300"></div>
+
+    <!-- Why Join {{clubinfo.sort_name}} Club? -->
+    <section class="container mt-5">
+        <h2 class="text-center"
+            style="font-weight: 700;font-family: var(--font_family);font-size: 40px; color: var(--primary);">
+            Why Join us better ?
+        </h2>
+
+        <div class="splide why_join_racewu mt-4">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {%for obj in whyjoins%}
+
+                    <li class="splide__slide">
+                        <div class="card  border-info " style="border: 1.5px solid; min-height: 80vh;">
+
+                            <div class="card-body" >
+                                <h5 class="card-title text-center" style="color: var(--secondary);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="83" height="83" fill="currentColor"
+                                        class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                </h5>
+                                <p class="card-text why_join_description" >
+                                    {{obj.reason}}
+                                </p>
+
+                            </div>
+                        </div>
+                    </li>
+                    {%endfor%}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- Current Members -->
+    <section class="status mt-5">
+        <div class="container">
+            <div class="d-flex justify-content-evenly align-items-center flex-column flex-lg-row text-center">
+                <div class="col-sm-3 " data-aos="fade-up" data-aos-delay="0">
+                    <div class="status-num"> <span data-value="{{clubinfo.current_member}}" id="current_members_val">{{clubinfo.current_member}}</span>+ </div>
+                    <div class="status-text">Current Members</div>
+                </div>
+                <div class="col-sm-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="status-num"> <span id="alumni_val" data-value="{{clubinfo.alumni}}" >{{clubinfo.alumni}}</span>+ </div>
+                    <div class="status-text">Alumni</div>
+                </div>
+                <div class="col-sm-3" data-aos="fade-up" data-aos-delay="600">
+                    <div class="status-num"> <span id="advisors_val" data-value="{{clubinfo.advisors}}">{{clubinfo.advisors}}</span>+ </div>
+                    <div class="status-text">Advisors</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="mt-5"></div>
+
+    <div class="bluebar-x" style="background-color:var(--secondary) ;" data-aos="fade-up" data-aos-duration="300"
+        data-aos-delay="900"></div>
+
+
+    <!-- Affiliates -->
+    <section class="container mt-5">
+        <h2 class="text-center"
+            style="font-weight: 700;font-family: var(--font_family);font-size: 40px; color: var(--primary);">
+            Affiliates
+        </h2>
+
+        <div class="splide affilates  mt-4">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {%for affiliate in affiliates%}
+
+                    <li class="splide__slide d-flex justify-content-center">
+
+                        <div class="affilates_box">
+                            <img src="{%if affiliate.picture %}{{affiliate.picture.url}}{%endif%}" class="affilates_img" alt="atr" srcset="">
+                        </div>
+
+
+                    </li>
+                    {%endfor%}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="mt-5"></div>
+
+    <!-- get in touch -->
+    <section class="getintouch" style="min-height: 80vh;">
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <img class="xsm-invisible" src="/static/img/undraw_letter_re_8m03.svg" style="width: 100%; aspect-ratio: 1/1;" alt="" srcset="">
+                </div>
+                <div class="col-sm-6">
+                    <div class="fs-1" style="
+                        font-family: var(--font_family);
+                        margin-bottom: 28px;
+                        overflow: hidden;
+                        text-transform: capitalize;
+                        
+                        ">Get in touch</div>
+                    <div class="form" data-aos="fade-up" data-aos-delay="300">
+                        <form class="" action="{%url 'core:getintouch'%}" method="post">
+                            {%csrf_token%}
+                            <label for="id_name">Name</label>
+                            <br>
+                            <input class="form-control" type="text" name="fullname" id="id_name" required>
+                            <br>
+                            <label for="id_name">Email</label>
+                            <br>
+                            <input class="form-control" type="email" name="email" id="id_email" required>
+                            <br>
+                            <label for="id_diccription">Discription</label>
+                            <br>
+                            <textarea class="form-control" name="discription" id="id_diccription" cols="25" rows="3"
+                                required></textarea>
+                            <br>
+                            <div>
+                                <input class="btn primary-btn" style="    float: right; width: 203px;" type="submit"
+                                    value="send">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"
+        integrity="sha256-SmCcbf/1ehhlBnw3ZGinNu6fjQV471LDBjc4yMMJhsk=" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-grid@0.2.0/dist/js/splide-extension-grid.min.js"
+        integrity="sha256-TF7FJ/F91hG2Y0namipwOMudTVXjCO9xsrVZ6//m3Zw=" crossorigin="anonymous"></script>
+
+
+
+
+
+    <script>
+
+
+
+
+       
+
+        new Splide('.blogs_articles_slides', {
+            perPage: 3,
+            rewind: true,
+
+            gap: "0.1em",
+            breakpoints: {
+                600: {
+                    perPage: 1,
+                    arrows: false,
+
+                },
+                900: {
+                    perPage: 2,
+                    arrows: false,
+                    gap: "1rem",
+                },
+
+            },
+            classes: {
+            pagination: 'splide__pagination blogs_and_article_slide_pagination',
+            page: 'splide__pagination__page pagination_page_color_seconday', // each button
+            }
+
+           
+        }).mount();
+
+        new Splide('.why_join_racewu', {
+            perPage: 3,
+            rewind: true,
+            type: 'loop',
+            arrows: false,
+
+            autoplay: true,
+
+            gap: "2em",
+
+            // height:"80vh",
+
+
+            breakpoints: {
+                600: {
+                    perPage: 1,
+                    arrows: false,
+                    gap: "3em",
+
+                },
+                900: {
+                    perPage: 2,
+
+                    gap: "3em",
+
+                }
+            },
+
+            classes: {
+                pagination: 'splide__pagination blogs_and_article_slide_pagination',
+		    page      : 'splide__pagination__page pagination_page_color_seconday', // each button
+         },
+
+        }).mount();
+
+
+        new Splide('.affilates', {
+            // perPage: 3,
+            focus: 'center',
+            // type: 'loop',
+            // autoplay: true,
+            rewind: true,
+            arrows: false,
+            // padding: '5rem',
+
+
+            gap: "1em", //The gap between slides. The CSS format is acceptable
+
+            height: "50vh",
+
+            grid: {
+                rows: 2,
+                cols: 5,
+
+                gap: {
+                    row: '10px',
+                    col: '20px',
+                },
+
+            },
+            breakpoints: {
+                767: {
+
+                    arrows: false,
+                    focus: 'center',
+                    grid: {
+                        rows: 2,
+                        cols: 2,
+                        gap: {
+                            row: '5px',
+                            col: '5px',
+                        },
+                    },
+
+                }
+            },
+
+
+        }).mount(window.splide.Extensions);
+
+
+
+
+
+
+        // video slider 
+
+        new Splide('.video-slider', {
+            perPage: 2,
+            rewind: true,
+            type: 'loop',
+            arrows: true,
+            focus: 'center',
+            direction:"ltr",
+
+            autoplay: true,
+
+            // gap: "2em",
+            width: "100%",
+            
+
+            breakpoints: {
+                990: {
+                    cloneStatus:false,
+
+                    perPage: 1,
+                    type: 'fade',
+                    rewind: true,
+                    
+                    
+                    direction:'ttb',
+                   
+                }
+            },
+
+        }
+        ).mount();
+
+
+        // last_Events
+
+
+        new Splide('.last_Events', {
+            perPage: 3,
+            rewind: true,
+
+            gap: "0.1em",
+            breakpoints: {
+                600: {
+                    perPage: 1,
+                    arrows: false,
+
+                },
+                900: {
+                    
+                    perPage: 1,
+                    arrows: true,
+
+                },
+
+            },
+            classes: {
+                pagination: 'splide__pagination transform_down_105', // container
+                page      : 'splide__pagination__page pagination_page_color_seconday', // each button
+            }
+        }).mount();
+
+
+        // number increment 
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        window.onload = function () {
+
+
+            let obj = document.getElementById("current_members_val");
+            animateValue(obj, 0, obj.getAttribute('data-value'), 5000);
+            obj = document.getElementById("alumni_val");
+            animateValue(obj, 10, obj.getAttribute('data-value'), 5000);
+            obj = document.getElementById("advisors_val");
+            animateValue(obj, 10, obj.getAttribute('data-value'), 5000);
+          
+
+
+
+        };
+
+
+
+
+    </script>
+
+{%endblock body%}
+{%include 'messanger_plugin.html'%}
+
+    {%include 'footer.html'%}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+    <script src="{%static 'js/index-bundle.js'%}"></script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- <script src="{%static 'js/mdb.min.js'%}"></script> -->
+    <script>
+        AOS.init();
+
+    </script>
+
+
+</body>
+
+</html>

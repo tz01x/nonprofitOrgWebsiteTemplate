@@ -1,0 +1,198 @@
+{%extends 'core/index.html'%}
+{%load static%}
+
+<!-- PAGE TITLE HERE -->
+
+
+{%block metatag%}
+<!-- article list -->
+<title>Articles - {{clubinfo.sort_name}}</title>
+<meta name="title" content="Articles - {{clubinfo.sort_name}}">
+<meta name="description" content="Find the out our last articles. {{clubinfo.meta_description}}">
+
+
+
+<meta property="og:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+<meta property="og:title" content="Articles- {{clubinfo.sort_name}}">
+<meta property="og:description" content="Find the out our last articles.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Articles- {{clubinfo.sort_name}}">
+<meta name="twitter:description" content="Find the out our last articles.">
+<meta name="twitter:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+{%endblock%}
+
+
+{%block body%}
+
+
+
+
+<!-- MOBILE SPECIFIC -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" type="text/css" href="/static/css/plugins.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/templete.css" />
+<link class="skin" rel="stylesheet" type="text/css" href="/static/css/skin/skin-1.css" />
+
+{{clubinfo.get_font_links}}
+
+{{clubinfo.loadtheam|safe}}
+<body id="bg">
+
+
+
+
+
+
+  <!-- inner page banner -->
+  <!-- <div class="blog_page dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle"
+    style='background-image: url({% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%else%} {%static "img/2_35__1.png"%} {%endif%})'>
+    <div class="container">
+      <div class="dlab-bnr-inr-entry">
+        <h1 class="text-white">Blog & Article</h1>
+      </div>
+    </div>
+  </div> -->
+  <!-- inner page banner END -->
+
+
+
+ 
+  {%include 'lending_pic.html'%}
+
+
+  <!-- Content -->
+  <div class="page-content bg-white">
+
+    <!-- inner page banner END -->
+    <div class="section-full content-inner">
+      <div class="container">
+
+        
+          
+  
+        <!-- Left part start -->
+        <div class="row" style="overflow: hidden;">
+          <div class="col-lg-8 col-xl-8 p-b30 p-t30 p-r20">
+            <h1 class="d-none" style=" border-bottom: 0.5px solid #353535; padding-bottom: 3px;"> Articles </h1>
+            <div class="row">
+              {% for object in object_list %}
+              <div class="col-lg-4 col-md-6 col-sm-6 m-b30" >
+                <div class="listing-bx"  data-aos="fade-up" >
+                  <div class="listing-media">
+                    <img loading="lazy" src="{%if object.picture%}{{object.picture.url}} {%endif%} " alt="" />
+                  </div>
+                  <div class="d-flex  flex-column mt-2 px-2" style="justify-content: space-around;">
+                    <a class="h6 text-dark font-weight-600" href="{%url 'core:blogAndArticle' slug=object.slug%}">
+                      {{object.title}}
+                    </a>
+                    <p>{{object.created}} </p>
+
+                  </div>
+                </div>
+              </div>
+              
+              {%empty%}
+            <h5>
+                No Data Found.
+            </h5>
+
+            {% endfor %}
+              
+            </div>
+            
+
+            {% if object_list.has_other_pages %}
+            <nav aria-label="Page navigation ">
+            <ul class="pagination ">
+                {% if object_list.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1">&laquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link" >&laquo;</span></li>
+                {% endif %}
+                {% for i in object_list.paginator.page_range %}
+                {% if object_list.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only"></span> </span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if object_list.has_next %}
+                <li  class="page-item"><a class="page-link"href="?page={{ object_list.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
+                {% endif %}
+            </ul>
+            </nav>
+            {% endif %}
+
+
+          </div>
+          <!-- Left part END -->
+          <!-- Side bar start -->
+          <div class="col-lg-4 col-xl-4 sticky-top p-t20 p-l30">
+            <aside class="side-bar blog-sidebar">
+              <div class="widget">
+                <h4 class="widget-title">Search</h4>
+                <div class="search-bx">
+                  <form role="search" method="get" >
+                    <div class="input-group">
+                     
+                      <input name="title" type="text"  class="form-control" placeholder="Search your keyword..."
+                        style="border-radius: 88px;" />
+                      <i class="fa fa-search icon"></i>
+                    </div>
+                  </form>
+                  
+                </div>
+              </div>
+
+              <div class="widget widget_tag">
+                <h4 class="widget-title">Categories</h4>
+                <ul class="m-b0">
+                  {%for category in categorys%}
+                  <li>
+                    <a href="./?catagory={{category.name}}">{{category.name}}</a> ({{category.num_of_blogandarticle}})
+                  </li>
+                  {%endfor%}
+                </ul>
+              </div>
+
+              {%include 'core/components/newsletter.html'%}
+             
+              {%include 'core/components/follow-socal-link.html'%}
+              
+
+              
+
+              <div>
+                {%include 'core/components/top_post.html'%}
+              </div>
+
+            </aside>
+          </div>
+          <!-- Side bar END -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+  <br>
+
+      <!-- JAVASCRIPT FILES ========================================= -->
+      <script src="/static/js/jquery.min.js"></script>
+      
+      <!-- FORM JS -->
+      <script src="/static/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+      
+      <!-- OWL SLIDER -->
+      <script src="/static/js/custom.js"></script>
+      
+  {%endblock%}

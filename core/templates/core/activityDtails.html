@@ -1,0 +1,397 @@
+{%extends 'core/index.html'%}
+
+{%load static%}
+{% load hitcount_tags %}
+
+{%block metatag%}
+<!-- activityDetails.html -->
+
+<meta name="title" content="{{object.title}} - {{clubinfo.sort_name}}">
+<meta name="description" content="{{object.shortDescription}}">
+
+
+
+<meta property="og:image" content="{%if object.picture %}{{object.picture.url}}{%endif %}">
+<meta property="og:title" content="{{object.title}} - {{clubinfo.sort_name}}">
+<meta property="og:description" content="{{object.shortDescription}}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{object.title}} - {{clubinfo.sort_name}}">
+<meta name="twitter:description" content="{{object.shortDescription}}">
+<meta name="twitter:image" content="{%if object.picture %}{{object.picture.url}}{%endif %}">
+
+
+<title>{{object.title}} - {{clubinfo.sort_name}} </title>
+
+
+{%endblock%}
+
+{%include 'nav.html'%}
+
+
+{%block body%}
+
+
+<link rel="stylesheet" type="text/css" href="/static/css/plugins.css" />
+
+<style>
+
+    .event-img {
+        /* height: 40vmin; */
+        aspect-ratio: 2.35/1;
+
+        object-fit: contain;
+    }
+
+    .event-body {
+
+        font-family: var(--font_family);
+        font-size: 1.4rem;
+        color: black;
+
+    }
+
+    .event-header-image{
+        max-width: 786px;
+        margin: auto;
+    }
+
+
+
+  
+
+
+
+
+
+</style>
+
+<link rel="stylesheet" href="/static/css/photoswipe.css" />
+<!-- galary start css -->
+<style>
+    .pswp__custom-caption {
+        /* background: var(--secondary);
+        font-size: 16px;
+        color: #fff;
+        width: calc(100% - 32px);
+        max-width: 400px;
+        padding: 2px 8px;
+        border-radius: 4px;
+
+        position: absolute;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%); */
+    }
+
+    .pswp__custom-caption a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .hidden-caption-content {
+        display: none;
+    }
+
+
+
+    .gallery {
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 300px 300px;
+        grid-gap: 10px;
+        grid-auto-flow: dense;
+    }
+
+    .col-span-1 {
+        grid-column: span 1;
+    }
+
+    .col-span-2 {
+        grid-column: span 2;
+    }
+
+    .col-span-3 {
+        grid-column: span 3;
+    }
+
+    .row-span-1 {
+        grid-row: span 1;
+    }
+
+    .row-span-2 {
+        grid-row: span 2;
+    }
+
+    .row-span-3 {
+        grid-row: span 3;
+    }
+
+    .pswp-gallery__item {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pswp-gallery__item a {
+        width: 100%;
+        height: 100%;
+
+    }
+
+
+    .pswp-gallery__item a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+        cursor: pointer;
+
+        transition: .3s ease-in-out;
+    }
+
+    .pswp-gallery__item:hover a img {
+        transform: scale(1.05);
+    }
+
+    @media screen and (max-width:760px) {
+
+        .gallery {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 200px 200px;
+
+        }
+
+    }
+
+    .h-100vh {
+        min-height: 100vh !important;
+    }
+
+    .font-40 {
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 47px;
+
+        color: #000000;
+    }
+</style>
+
+
+<!-- galary css end -->
+
+{%include 'lending_pic.html'%}
+
+
+<div class="container " >
+    <div class="row">
+        <div class="col-lg-12">
+            <div>
+                <section class="event">
+                    <div class="event-header mt-4 px-2 px-md-5 mt-2 mb-3">
+
+                        <div class="d-flex justify-content-between flex-column flex-lg-row mb-2">
+                            <h2 class="mb-0">{{object.title}}</h2>
+                            <div class="clearfix">
+                                <div class="float-right text-right">
+                                  <ul class="list-inline m-t20 m-b0" 
+                                  style="
+                                  flex-direction: row !important;
+                                  display: flex;
+                                  letter-spacing: 6px;
+                                ">
+                                    
+                                    <li>
+                                      
+                                      <a href="https://www.facebook.com/sharer/?u={{request.build_absolute_uri}}" class="site-button-link gray-light fa fa-facebook-f"></a>
+                                    </li>
+                                    <li>
+                                      <a href="https://twitter.com/share?url={{request.build_absolute_uri}}&text={{object.title}}" class="site-button-link gray-light fa fa-twitter"></a>
+                                    </li>
+                                    
+                                    <li>
+                                      <a href="https://www.linkedin.com/shareArticle?url={{request.build_absolute_uri}}" class="site-button-link gray-light fa fa-linkedin"></a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                        </div>
+                        
+
+                        <small class="mt-5 text-dark" >
+
+                            <samp>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                    <path
+                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                </svg>
+                                {% get_hit_count for object %}
+                            </samp>
+
+                            <samp>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-calendar4-event" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z" />
+                                    <path
+                                        d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                </svg>
+                                {{object.created}}
+                            </samp>
+
+                        </small>
+
+                    </div>
+                    <div class="event-header-image row justify-content-center align-items-center mt-2">
+                        <img src="{%if object.picture %} {{object.picture.url}}{%endif %}" class="event-img"
+                            alt="event-img" srcset="">
+                    </div>
+
+                    
+                    <div class="event-body mt-4 px-2 px-md-5" style="word-break: break-all;">
+                        {{object.content|safe}}
+                    </div>
+
+                    <!-- event images -->
+                    {%if object.images %}
+                    <div class="mt-5">
+
+                        <h3 class="" style="color: black;">Related pictures</h3>
+
+
+                        <div class="pswp-gallery pswp-gallery--with-caption  gallery mt-4 "
+                            id="gallery--with-custom-caption">
+
+
+                            {%for image in object.images.all%}
+
+
+
+                            <div class="pswp-gallery__item ">
+                                <a href="{{image.img.url}}" data-pswp-width="{{image.width}}"
+                                    data-pswp-height="{{image.height}}" target="_blank">
+                                    <img src="{{image.img.url}}" alt="" loading="lazy" />
+                                </a>
+                            </div>
+
+                            {%endfor%}
+                        </div>
+                    </div>
+                    {%endif%}
+
+                </section>
+                
+            </div>
+            {%if similar_object%}
+            <hr>
+            
+            <h2>Recent News</h2>
+            <div class="row">
+                
+                {%for obj in similar_object%}
+                <div class="col-xl-4 col-lg-6 col-md-6 col-xs-12  px-4 ">
+                  <div class="blog-post blog-lg list-blog-bx">
+                    <div class="row justify-content-center">
+                      <img src="{%if obj.picture%}{{obj.picture.url}}{%endif%}" alt=""  style="width: 100%;   height: 200px; object-fit: contain;"/>
+                    </div>
+                    <div class="dlab-post-info">
+                      <div class="dlab-post-title">
+                        <h6 class="post-title">
+                          <a href="{{obj.get_absolute_url}} " aria-label="{{obj.title}}">{{obj.title}}</a>
+                        </h6>
+                      </div>
+                      <div class="dlab-post-text mb-0">
+                        <p class="m-b0">{{obj.created}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {%endfor%}
+                {%endif%}
+                
+              </div>
+
+            {%if createComment_url%}
+            {%include 'core/components/comments.html'%}
+            {%endif%}
+        </div>
+        <!-- <aside class="col-lg-2">
+
+            <div class="row justify-content-center align-items-center">
+
+                
+
+            </div>
+
+        </aside> -->
+    </div>
+
+
+</div>
+
+
+
+<div class="mt-5"></div>
+
+
+
+<script type="module">
+    // Include Lightbox 
+    import PhotoSwipeLightbox from '/static/js/photoswipe-lightbox.esm.js';
+
+    const lightbox = new PhotoSwipeLightbox({
+        // may select multiple "galleries"
+        gallery: '#gallery--with-custom-caption',
+
+        // Elements within gallery (slides)
+        children: 'a',
+
+        // Include PhotoSwipe Core
+        // and use absolute path (that starts with http(s)://)
+        pswpModule: '/static/js/photoswipe.esm.js'
+    });
+
+
+
+    lightbox.on('uiRegister', function () {
+        lightbox.pswp.ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            html: 'Caption text',
+            onInit: (el, pswp) => {
+                lightbox.pswp.on('change', () => {
+                    const currSlideElement = lightbox.pswp.currSlide.data.element;
+                    let captionHTML = '';
+                    if (currSlideElement) {
+                        const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
+                        if (hiddenCaption) {
+                            // get caption from element with class hidden-caption-content
+                            captionHTML = hiddenCaption.innerHTML;
+                        } else {
+                            // get caption from alt attribute
+                            captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
+                        }
+                    }
+                    el.innerHTML = captionHTML || '';
+                });
+            }
+        });
+    });
+
+
+    lightbox.init();
+
+
+
+</script>
+{%endblock body%}
+{%include 'footer.html'%}

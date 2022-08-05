@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350" height="444" fill="none" viewBox="0 0 350 444">
+  <rect width="350" height="444" fill="url(#pattern0)" rx="20"/>
+  <defs>
+    <pattern id="pattern0" width="1" height="1" patternContentUnits="objectBoundingBox">
+      <use transform="matrix(.00137 0 0 .00112 -.111 .163)" xlink:href="#image0"/>
+    </pattern>
+  </defs>
+</svg>

@@ -1,0 +1,102 @@
+{%load static%}
+<style>
+    .slider_img {
+
+        height: 70vh;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .slider_img {
+            
+            height: 40vh;
+
+        }
+    }
+
+    @media only screen and (max-width: 575px) {
+
+        .slider_img {
+           
+            height: 25vh;
+           
+
+        }
+
+    }
+    /* .splide__progress__bar_color{
+        background-color: var(--primary);
+        opacity: 0.6;
+    } */
+</style>
+<div>
+
+
+<div class="splide intro_slider_splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            {%for pic in clubinfo.get_all_landing_pictures%}
+            <li class="splide__slide">
+                <img src='{{pic.url}}' class="slider_img" />
+            </li>
+            {%endfor%}
+            
+        </ul>
+    </div>
+
+    <div class="splide__progress">
+        <div class="splide__progress__bar splide__progress__bar_color">
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"
+    integrity="sha256-SmCcbf/1ehhlBnw3ZGinNu6fjQV471LDBjc4yMMJhsk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-grid@0.2.0/dist/js/splide-extension-grid.min.js"
+    integrity="sha256-TF7FJ/F91hG2Y0namipwOMudTVXjCO9xsrVZ6//m3Zw=" crossorigin="anonymous"></script>
+
+<script>
+
+
+    new Splide('.intro_slider_splide', {
+        loop: true,
+        perPage: 1,
+        rewind: true,
+        arrows: false,
+        // cover:true,
+        autoplay: true,
+        interval: 5000,
+        pagination: false,
+        wheel: true,
+        releaseWheel: true,
+        direction: 'ltr',
+        type: 'fade',
+        gap: "1rem",
+        focus: 'center',
+        // height:"50vh",
+        lazyLoad: 'nearby',
+        breakpoints: {
+
+            992: {
+
+
+            },
+            320: {
+
+
+            },
+
+        },
+        classes: {
+            // Add classes for arrows.
+            arrows: 'splide__arrows arrow_transparent_bg',
+            arrow: 'splide__arrow arrow_transparent_bg',
+
+            pagination: 'splide__pagination blogs_and_article_slide_pagination',
+            page: 'splide__pagination__page ', // each button
+        }
+    }).mount();
+</script>

@@ -1,0 +1,73 @@
+{%load static%}
+<style>
+
+       /* top-posts  */
+
+       .top-post-update-btn {
+        text-decoration: none;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+    /* line-height: 23px; */
+        /* or 189% */
+
+        text-transform: uppercase;
+
+        /* Secondary color */
+
+        color: var(--secondary);
+
+
+    }
+
+    .top-posts-details {
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+     
+
+
+        color: #2E2E2E;
+
+    }
+
+    .top-posts-img{
+        padding: 0;
+    }
+    .top-posts-img img{
+        width: 100%;
+        object-fit: contain;
+        height: 100%;
+
+    }
+</style>
+
+
+<div class="top-posts mt-3">
+
+    
+    {%if popular_obj%}
+
+    <p class="slide-header-txt">{%if sub_title%} {{sub_title}} {%else%}Top Post{%endif%}</p>
+    <!-- <br> -->
+
+    <div class="row" style="min-height: 150px;" data-aos="fade-up">
+        <div class=" col-4  top-posts-img" >
+
+            <img src="{%if popular_obj.picture%} {{popular_obj.picture.url}} {%endif%}" alt="img" srcset="">
+
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12"><a href="{{popular_obj.get_absolute_url}}" class="top-post-update-btn">{{popular_obj.title}}</a></div>
+                <div class="col-12  top-posts-details">
+                    {{popular_obj.shortDescription}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%endif%}
+
+</div>

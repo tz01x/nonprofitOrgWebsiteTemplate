@@ -1,0 +1,212 @@
+{%extends 'core/index.html'%}
+{%load static%}
+{% load hitcount_tags %}
+{%block metatag%}
+<title>{{clubinfo.sort_name}} : Terms And Conditions</title>
+{{ block.super }}
+{%endblock%}
+{%block body%}
+
+
+
+<style>
+  .title{
+    border-bottom: 1px solid;
+    padding: 17px 3px;
+  }
+</style>
+
+<div class="page-content ">
+  {%with banner_title=object.name%}
+{%include 'lending_pic.html'%}
+{%endwith%}
+<div class="page-wraper">
+
+
+  <!-- Content -->
+
+    
+    <div class="section-full content-inner">
+      <div class="container">
+        <!-- Left part start -->
+        <div class="row mt-3">
+          {%if object.name%}
+          <h1 class="title d-sm-none">{{object.name}}</h1>
+          {%else%}
+          <h1>Terms & Conditions</h1>
+          {%endif%}
+
+          {%if object.content%}
+          
+          {{object.content|safe}}
+          {%else%}
+          <p>
+            Article One- MEETINGS
+            <br />a) Regular and Board Meeting: Regular meeting will be held
+            on the 2nd and last Wednesday of every month at evening, before
+            a program and Board meeting will be held not less than once a
+            month which will be notify at least three days before the
+            meeting. Regular meeting will take place to the convenience of
+            the club members. Any member out of the Board can join in the
+            board meeting upon his/her interest with the concern of the club
+            president. <br />b) Quorum Requirement: A majority of the
+            members in good standing shall constitute a quorum at any
+            regular and board meeting. But among them at least two directors
+            and the president or vice-president must be present.<br />
+            c) Meeting Minutes: Minutes of the meetings will be provided to
+            the chairman of partners in service committee (PSCC), and these
+            minutes singed by the PSCC, will be preserved as the club
+            resource.<br />
+            d) Cancellation The board may cancel a regular meeting if it
+            falls on a legal holding or in case of the death of club member,
+            an epidemic, a disaster affecting the whole community that
+            endangers the lives of the club members. In this case, club
+            members, District Rotaract Representative (DRR) and the chairman
+            of Partners in Service Committee (PSCC) should be informed.
+            <br />
+            <br />
+            Article Two- Membership
+            <br />
+            <br />
+            a. Induction: 1. A person willing to be the member of this club
+            must be a student of East West University. He/she must attend
+            three consecutive regular meetings.
+            <br />
+            2. Person meeting with the above qualification may apply to the
+            club president through the Club Service Director describing
+            his/her interest for the membership. He/she must be sponsored by
+            one of the club members.
+            <br />
+            3. The membership proposal will be considered in the next
+            available board meeting. If the board members are agreed to
+            accept the membership, he/she will be welcomed as a member of
+            the club in the next available regular meeting. It is subjected
+            to no objection any club member.
+            <br />
+            b. Attendance: Each member of this club shall attend at least
+            75% of the club’s regular scheduled meetings annually. Any
+            member absent from a regular meeting of this club may ake up
+            such absence by the attendance at a regular meeting of any other
+            Rotaract or Rotary club on any day of the two weeks immediately
+            preceding or following the day of absence. <br />
+            c. Termination: Membership shall be terminated automatically
+            upon failure to meet attendance requirements unless excused by
+            the board of directors of the club for good and sufficient
+            reason or by termination of the club. Membership also may be
+            terminated for any special cause, which relates to the club
+            image, by vote of not less than 2/3 of all the members in good
+            standing.
+            <br />
+            d. Good standing members: Member who fulfills the requirements
+            of attendance and pays all the fees and dues time to time is
+            considered in good standing. Article Three- FEES AND DUES
+            <br />
+            a. Fees and dues: The admission fee of the new members shall be
+            TK. 100.00; in addition he/she has to pay he district dues and
+            directory dues. The monthly dues shall be TK. 50.00 per member.
+            <br />
+            b. Club fund: Collected monthly dues from the members shall be
+            used for the administrative purpose of club. Article Four-
+            ELECTION<br />
+            1. Club board will consist of the following post- President,
+            Immediate Past President, President Elect, Vice- President,
+            Secretary, Joint-Secretary, Treasurer, Directors (Club Service,
+            Community Service, International Service, Professional
+            Development Service, Finance Service), Editor,
+            Sergeant-at-arms.<br />
+            2. Election will be held for the position of President only.
+            Only Vice- President, Secretary, Joint Secretary, and Treasurer
+            can participate as the Candidate. Elected President will appoint
+            Vice- President, Secretary, Joint-Secretary, and Treasurer
+            consulting with Past Presidents considering the performance,
+            dedication and seniority. Other board members including Service
+            Directors will be selected by the Elected President considering
+            the potentiality and dedication. <br />
+            3. Election will be held under the election commission. Past
+            Presidents will be the member of this commission and board will
+            decide the chairman of this ommission. <br />
+            4. Nomination shall be in written. Candidates shall be voted
+            upon at the regular meeting (close door). Voting shall be by
+            secret ballot. Those candidates receiving a majority of the
+            votes of the present member and in good standing shall be
+            elected. <br />
+            5. Election will be held annually prior to February. The board
+            will be formed prior to March. This board will take office 1st
+            July. The installation program will be organized within July.
+            Article Five- DUTIES OF OFFICER President The president shall
+            preside at all regular and board meetings. He/she shall act as a
+            supervisor of all programs and projects undertaken by the club.
+            He/she shall also maintain communication with the sponsored
+            Rotary club, District Rotaract Representative and other Rotaract
+            clubs. Past Presidents Past Presidents (PP) will work as the
+            official advisor of the President where Immediate Past President
+            (IPP) will be the Chief. They can maintain their Club Membership
+            up to thirty years old if they wish. Article Two (Membership) of
+            this by-laws will not be applicable for the Past Presidents.
+            Vice- President Vice- President (VP) shall work closely to the
+            president. He/she shall preside at all regular meetings and
+            board meetings in absence of the president. He/she shall
+            communicate with Rotary International and inform Rotary and
+            Rotaract information to the members. He/she shall assist the
+            club secretary to preserve club resources. Secretary Honorary
+            Secretary (HS) shall maintain all club records and resources.
+            He/she shall keep minutes of all regular and board meetings and
+            provide copies to the PSCC. Joint Secretary will maintain all
+            the secretarial jobs in the absenteeism of Honorary Secretary.
+            Otherwise he/she will be appointed for specific duties from the
+            President. Treasure Honorary Treasure (HT) shall maintain all
+            records related to finance. He/she shall prepare annual budget
+            with the approval of the board. He/she shall report on the clubs
+            financial status quarterly and provide a Rotary Year report at
+            the end. Article Six- COMMITTEES The president shall appoint the
+            following standing committees with the approval of the board. a.
+            Club Service Committee: This committee shall be responsible for
+            membership, programs, fellowship, public relations and such
+            other matters as may be deemed appropriate. b. Community Service
+            Committee: This committee shall have responsibility for
+            enhancing knowledge and understanding of community needs,
+            problems and opportunities and for formulating and developing
+            opportunities and for formulating and developing appropriate
+            activities for serving the community. c. International Service:
+            This committee shall be charged with primary responsibility for
+            enhancing knowledge and understanding of world wide needs,
+            problems, and opportunities and developing activities to give
+            service for promoting international understanding and goodwill
+            toward all people. This committee shall plan for the clubs
+            annual international services projects also. d. Professional
+            Development Service Committee: This community shall be
+            responsible for developing a program designed to provide
+            information about a wide cross section of business and
+            professions and to stimulate awareness and acceptance of high
+            ethical standards in business and professional life. e. Finance
+            Committee: This committee shall plan fund raising programs or
+            projects to support club administration and services activities.
+            The President may appoint several sub-committees with the board
+            approval to help the standing committees as Membership
+            Development and Attendance Committee, Rotary- Rotaract
+            Information Committee, Public Relation Committee, Fund Raising
+            Committee etc. It is to be noted that, the International Service
+            and Community Service committees shall each have the duty of
+            initiating and planning one major activity in its field each
+            year which shall involve all or most of the club membership.
+            Article Seven- AMENDEMENTS ➢ These by-laws may be amended by
+            majority vote of the members in good standing at any regular or
+            special meeting of the club at which a quorum is present,
+            provided notice of intention to call such a vote a given at
+            least fourteen days earlier at meeting of the club at which a
+            quorum is present, and provided such amendment must be approved
+            by the president of Rotary Club of Dhaka North. ➢ Nothing in
+            these by-laws can contravene any provision of Standard Rotaract
+            Club Constitution.
+          </p>
+          {%endif%}
+
+          <!-- Side bar END -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Content END-->
+
+</div>
+{%endblock%}

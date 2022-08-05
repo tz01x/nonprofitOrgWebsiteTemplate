@@ -1,0 +1,238 @@
+{# params  object_list:list, selector:string #}
+{# object_list must have slug field #}
+{# url_path , related url of this view #}
+{%load static%}
+
+<style>
+    .lending-pic{
+        height: 45vh;
+      
+    }
+    .black_cover{
+        background-color: black;
+        opacity: 0.5;
+        width: 100%; 
+        height: inherit; 
+        position: absolute;
+        z-index: -2;
+    }
+    .intro-pics {
+
+        /* margin-top: 2%; */
+
+        background: url('{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%else%} {%static "img/2_35__1.png"%} {%endif%}  ');
+        width: 100%;
+        height: inherit;
+        
+        /* aspect-ratio: 2.35/1; */
+
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        z-index: -3;
+       
+        
+
+
+
+    }
+
+    .banner_title {
+        position: relative;
+
+        top: 40%;
+        left: 5%;
+        font-size: 3rem;
+        font-weight: 600;
+        color: white;
+        text-shadow: -1px 1px 2px black;
+    }
+    .category_btn{
+        
+        border-radius: 35px;
+        box-shadow: -1px 1px 4px 0px #00000079;
+        text-shadow: -1px 1px 4px  #00000079;
+        border: 2px solid white;
+        min-height: 38px;
+        width: 150px;
+        opacity: 0.6;
+    }
+    .category_btn-active{
+        /* background-color: var(--secondary); */
+        /* color: var(--text_in_secondary); */
+        /* border: 0px solid white;
+        box-shadow: -1px 1px 4px -1px #00000079;
+        text-shadow: none; */
+        opacity: 1;
+        
+
+    }
+    .category_btn:active{
+        /* background-color: var(--secondary_liter); */
+        box-shadow: -1px 1px 4px -1px #00000079;
+        opacity: 1;
+    }
+
+    .catagories{
+        position: relative;
+        top: 37%;
+    }
+    
+    @media only screen and (max-width: 992px) {
+        .lending-pic{
+            height: 38vh;
+        }
+        .intro-pics {
+            object-fit: contain;
+           
+
+            margin-top: 0;
+
+        }
+        .black_cover{
+            height: 38vh;
+        }
+
+        .banner_title {
+            font-size: 2.2rem;
+            
+        }
+        .catagories{
+
+            top: 35%;
+        }
+
+    }
+
+    /*Big smartphones [426px -> 600px]*/
+    @media only screen and (max-width: 576px) {
+        .lending-pic{
+            height: 15vh;
+        }
+        .intro-pics {
+            object-fit: contain;
+            
+            margin-top: 0;
+
+        }
+        .black_cover{
+            display: none;
+        }
+
+        .banner_title {
+            display: none;
+        }
+        .catagories{
+            display: none;
+        }
+
+    }
+
+    .arrow_transparent_bg{
+
+        background: transparent !important;
+    }
+    
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css"
+integrity="sha256-EqzwzekQXKNbB5EE4nNBQT+2gWQIWRZQXAd89YdIq8M=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide-core.min.css"
+integrity="sha256-XyY0okd1iYtK9Q8WBJ3HnJtNgJPS5UGv7E4qTBsbA/8=" crossorigin="anonymous">
+
+{%with start_slide=0%}
+<div class="lending-pic">
+    <div class="intro-pics" ></div>
+    <div class="black_cover" ></div>
+    {%if banner_title%}
+
+    <span class="banner_title container">{{banner_title}}</span>
+
+        {%if object_list%}
+        <div class="catagories container">
+
+            <div class="splide category_slider mt-4">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {%for object in object_list%}
+                        <li class="splide__slide row justify-content-center py-2 px-1">
+                            <div onclick="select_category_handeler('{{object.slug}}')" data-idx='{{forloop.counter0}}' data-slug="{{object.slug}}" class="text-white btn  category_btn  
+                                {%if selector == object.slug %} 
+                                
+                                category_btn-active
+
+
+                                {%endif%}
+                                ">
+                                
+                                {{object}}
+                            </div>
+                        </li>
+                        {%endfor%}
+                        
+            
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {%endif%}
+    {%endif%}
+
+</div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"
+integrity="sha256-SmCcbf/1ehhlBnw3ZGinNu6fjQV471LDBjc4yMMJhsk=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-grid@0.2.0/dist/js/splide-extension-grid.min.js"
+integrity="sha256-TF7FJ/F91hG2Y0namipwOMudTVXjCO9xsrVZ6//m3Zw=" crossorigin="anonymous"></script>
+
+<script>
+     function select_category_handeler(value){
+        window.location.href = window.location.origin+"{{url_path}}"+ value+"/";
+    }
+    const staring_indx=document.getElementsByClassName("category_btn-active")[0].getAttribute("data-idx");
+
+      new Splide('.category_slider', {
+            start:  staring_indx!=null?parseInt(staring_indx):0,
+            loop:true,
+            perPage: 4,
+            rewind: true,
+            arrows: true,
+            pagination:false,
+            direction   : 'ltr',
+            wheel       : true,
+            releaseWheel: true,
+            gap: "1rem",
+            focus:'center',
+            // height:"3rem",
+            breakpoints: {
+                
+                992: {
+                    perPage: 3,
+                    
+                },
+                320: {
+                    perPage: 0,
+                    
+                },
+
+            },
+            classes: {
+            		// Add classes for arrows.
+            arrows: 'splide__arrows arrow_transparent_bg',
+            arrow : 'splide__arrow arrow_transparent_bg',
+     
+            pagination: 'splide__pagination blogs_and_article_slide_pagination',
+            page: 'splide__pagination__page ', // each button
+            }
+        }).mount();
+</script>
+
+{%endwith%}
