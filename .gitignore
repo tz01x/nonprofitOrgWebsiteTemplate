@@ -34,7 +34,7 @@ media
 *.so
 
 # Distribution / packaging
-migrations
+
 static/static_root/
 .Python
 build/
