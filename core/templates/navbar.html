@@ -1,0 +1,473 @@
+{%load static%}
+<style>
+    .navbar {
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 1px 5px rgba(255, 48, 11, 0.438);
+        z-index: 10000;
+    }
+
+    .navbar-brand {
+
+        width: 85px;
+
+    }
+
+    .navbar-brand img {
+        width: 100%;
+    }
+
+
+
+    .navbar a {
+
+        text-decoration: none !important;
+
+
+    }
+
+    .navbar-active {
+        color: var(--primary) !important;
+    }
+
+    .navbar-btn a {
+        color: var(--primary) !important;
+        font-weight: 600 !important;
+
+
+    }
+
+    .navbar .hamburger-lines {
+        display: block;
+        height: 26px;
+        width: 32px;
+        /* position: absolute; */
+        /* top: 17px; */
+        /* right: 20px; */
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .hamburger-lines .line {
+        display: block;
+        height: 4px;
+        width: 100%;
+        border-radius: 10px;
+        background: #0e24318c;;
+    }
+
+
+    .hamburger-lines .line1 {
+        transform-origin: 0% 0%;
+        transition: transform 0.4s ease-in-out;
+    }
+
+    .hamburger-lines .line2 {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .hamburger-lines .line3 {
+        transform-origin: 0% 100%;
+        transition: transform 0.4s ease-in-out;
+    }
+
+
+
+    .line1-active {
+        transform: rotate(45deg);
+    }
+
+    .line2-active {
+        transform: scaleY(0);
+    }
+
+    .line3-active {
+        transform: rotate(-45deg);
+    }
+
+    .navbar-hamburger {
+        display: none;
+    }
+
+
+    .navbar .navbar-items {
+
+        display: flex;
+        transform: translateX(-4%);
+    }
+
+    .navbar-item {
+        position: relative;
+        margin-left: 10px;
+        padding: 10px;
+        color: var(--secondary) ;
+
+    }
+
+    .navbar-item:hover {
+        color: var(--primary) !important;
+    }
+
+    .navbar-item a {
+        color: inherit;
+    }
+
+    .navbar-item a:hover {
+        color: inherit;
+    }
+
+    .navbar-dropdown {
+        color: inherit;
+        cursor: pointer;
+        pointer-events: none;
+        
+    }
+
+    .navbar-dropdown:after {
+        content: "";
+        position: absolute;
+        top: 18px;
+        right: -5px;
+        /* Example: right:10px; */
+        display: inline-block;
+        border-right: 4px solid transparent;
+        border-top: 4px solid var(--secondary);
+        border-left: 4px solid transparent;
+    }
+
+    .navbar-dropdown-menu {
+        position: absolute;
+        max-height: 200px;
+        left: 0%;
+        z-index: 100;
+
+        overflow: hidden;
+        overflow-y: scroll;
+
+        background-color: var(--secondary);
+        box-shadow: -1px 1px 10px -1px rgba(0, 0, 0, 0.418);
+        border-radius: 10px;
+
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.5s ease-in-out;
+        transform-origin: top;
+        
+    }
+
+    .navbar-dropdown-menu::-webkit-scrollbar{
+        width: 1px;
+    }
+    
+
+
+    .navbar-item:hover .navbar-dropdown-menu {
+        /* display:block; */
+        opacity: 1;
+        transform: scale(1);
+        left: 50%;
+
+        transform: translateX(-50%);
+    }
+   
+    .dropdown-item {
+        color: var(--text_in_secondary) !important;
+        font-size: 1rem !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: var(--secondary_liter) !important;
+        color: var(--text_in_secondary) !important;
+
+    }
+
+    .dropdown-item:focus, .dropdown-item:hover{
+
+color: var(--text_in_secondary) !important;
+background-color: var(--secondary_liter) !important;
+}
+
+    .bg-cover {
+        left: 0;
+        width: 100%;
+            height: 200vh;
+            background: #000000ad;
+         
+            padding-bottom: 100%;
+            position: absolute;
+            top: 5.1em;
+            z-index: 1050;
+
+        transform:scale(0);
+        opacity: 0;
+        transform-origin: top;
+        transition: opacity 0.8s ease-in-out;
+       
+        
+
+    }
+
+    @media only screen and (max-width: 992px) {
+        
+
+        .navbar-brand {
+
+            width: 65px;
+
+        }
+
+
+        .navbar .navbar-items {
+
+
+            position: absolute;
+            right: -2%;
+            top: 100%;
+            width: 60%;
+            border-radius: 2px;
+            /* overflow: hidden; */
+            flex-direction: column;
+            padding-bottom: 100%;
+            background-color: rgb(255, 255, 255);
+            box-shadow: -1px 1px 5px -1px black;
+            /* box-shadow: -262px 271px 78px 262px #0000008a; */
+            z-index: 1100;
+            transform-origin: top right;
+            /* transform: translateX(150%); */
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out,
+                opacity 0.5s ease-in-out;
+        }
+
+        .navbar .navbar-items-active {
+
+
+            opacity: 1;
+            transform: scale(1);
+
+            /* transform: translateX(0%); */
+        }
+
+
+
+        .navbar-item {
+            
+            border-bottom: 0.01px solid #8080802e;
+        }
+
+        .navbar-dropdown:after {
+            display: none;
+        }
+
+        .navbar-dropdown:before {
+
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: -3px;
+            /* Example: right:10px; */
+            display: inline-block;
+            border-right: 4px solid transparent;
+            border-top: 4px solid var(--secondary);
+            border-left: 4px solid transparent;
+
+        }
+
+        .navbar-btn {
+            transform: translateX(-50%);
+        }
+
+        .navbar-hamburger {
+            display: block;
+        }
+
+
+        .navbar-dropdown-menu{
+            transition: none;
+        }
+        .navbar-item:hover .navbar-dropdown-menu {
+         
+                position: relative;
+                left: -9px;
+                width: 100%;
+                border-radius: 0;
+                opacity: 1;
+                transform: scale(1);
+                /* transform: translateX(-50%); */
+        }
+
+        .bg-cover-active {
+           opacity: 1;
+        transform:scale(1);
+
+         
+            
+
+        }
+    }
+</style>
+<nav class="navbar " id="_n_a_v" >
+    <div class="container d-flex justify-content-between align-items-baseline">
+        <div class="navbar-brand">
+            {%if clubinfo and clubinfo.logo%}
+            <a href="{%url 'core:index'%}"><img  src="{{clubinfo.logo.url}}" alt="logo" title="{{clubinfo.sort_name}}" srcset=""></a>
+            
+            {%else%}
+
+            <img src=""  alt="logo" srcset="">
+
+
+            {%endif%}
+        </div>
+        <div class="navbar-items">
+            <div class="navbar-item">
+                {%  url 'core:index' as home_url %}
+                <a href="{{home_url}}" {%if request.get_full_path == home_url%} class="navbar-active" {%endif%}>Home</a>
+            </div>
+            <!-- <div class="navbar-item">
+                {%  url 'core:articles' as article_url %}
+                <a href="{{article_url}}" {%if url_active == 'article' or request.get_full_path == article_url%} class="navbar-active" {%endif%}>Article</a>
+            </div>
+            <div class="navbar-item">
+                {%  url 'core:publications' as publications_url %}
+                <a href="{{publications_url}}" {%if url_active == 'publication' or request.get_full_path == publications_url%} class="navbar-active" {%endif%}>Publication</a>
+            </div> -->
+            
+            <div class="navbar-item">
+                
+                <a href="" role="button" class="navbar-dropdown {%if url_active == 'activity'%}
+                                                                    navbar-active 
+                                                                {%endif%}">Activity</a>
+                
+                <div class="navbar-dropdown-menu">
+                    <a href="{%url 'core:articles'%}" class="dropdown-item"> Articles </a>
+                    <a href="{%url 'core:publications'%}" class="dropdown-item"> Publication </a>
+                    
+                </div>
+            </div>
+
+
+            <div class="navbar-item">
+                {%  url 'core:gallery' as gallery_url %}
+                <a href="{{gallery_url}}" {%if request.get_full_path == gallery_url%} class="navbar-active" {%endif%}>Gallery</a>
+            </div>
+
+
+
+
+
+            <div class="navbar-item">
+                {#url_active context coming form event_list view #}
+                <a href="" role="button"  class=" navbar-dropdown {%if url_active == 'event'%}
+                                                                      navbar-active 
+                                                                    {%endif%}">Events</a>
+
+
+                <div class="navbar-dropdown-menu">
+                    <div class="text-center" style="border-bottom:  0.2px solid var(--text_in_secondary); padding: 4px;">
+                        <a href="#" class="" style="color: var(--text_in_secondary); "> Rotary Year </a>
+
+                    </div>
+
+                    {%for semester in semester_list%}
+                    <a href="{%url 'core:event_list' slug=semester.slug%}" class="dropdown-item"> {{semester}} </a>
+                    {%endfor%}
+                </div>
+
+            </div>
+
+            <div class="navbar-item">
+                {%  url 'core:news' as url_str %}
+                <a href="{{url_str}}" {%if  url_active == "news" or request.get_full_path == url_str%} class="navbar-active" {%endif%}>News</a>
+            </div>
+
+            <div class="navbar-item">
+                {#url_active context coming form members_list view #}
+                <a href="" role="button" class="navbar-dropdown {%if url_active == 'Governing Body'%} navbar-active {%endif%}">Governing Body</a>
+
+
+                <div class="navbar-dropdown-menu">
+                    {%for view in member_views%}
+                    <a href="{%url 'members:members_list' slug=view.slug%}" class="dropdown-item"> {{view}} </a>
+                    {%endfor%}
+                </div>
+            </div>
+
+            <div class="navbar-item">
+                {%  url 'members:alumni_view' as alumni_view %}
+
+                <a href="{{alumni_view}}"  {%if request.get_full_path == alumni_view%} class="navbar-active" {%endif%} >Alumni</a>
+            </div>
+
+            <div class="navbar-item">
+                <a href="#">Career</a>
+            </div>
+
+        </div>
+        <div class="navbar-btn">
+            <a href="{%url 'core:signup'%}" title="Register to {{clubinfo.sort_name}}">
+                JoinUs
+            </a>
+        </div>
+
+        <div class="align-self-center navbar-hamburger" onclick="hambargerAnimation()">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="bg-cover" onclick="hambargerAnimation()"></div>
+
+</nav>
+
+
+<div id="scroll-d"></div>
+
+<script>
+    function hambargerAnimation() {
+
+        document.querySelector('.hamburger-lines .line1').classList.toggle('line1-active');
+        document.querySelector('.hamburger-lines .line2').classList.toggle('line2-active');
+        document.querySelector('.hamburger-lines .line3').classList.toggle('line3-active');
+
+        document.querySelector('.navbar-items').classList.toggle('navbar-items-active');
+        document.querySelector('.bg-cover').classList.toggle('bg-cover-active');
+
+
+
+    }
+
+
+    var scroll_d = document.getElementById('scroll-d').offsetTop;
+    var nav = document.getElementById('_n_a_v');
+    var nav_fix = false;
+    window.onscroll = function () {
+        // called when the window is scrolled.  
+
+        if (!nav_fix && window.scrollY > scroll_d) {
+
+            nav.classList.add('fixed-top');
+            nav_fix = true;
+        }
+        if (nav_fix && window.scrollY < 1) {
+            nav.classList.remove('fixed-top');
+            nav_fix = false;
+            console.log('rmemove')
+
+        }
+
+
+
+    }
+</script>

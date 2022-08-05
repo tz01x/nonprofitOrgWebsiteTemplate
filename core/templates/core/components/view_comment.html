@@ -1,0 +1,81 @@
+<style>
+    .single_comment_box {
+        border-left: 4px solid rgba(59, 59, 59, 0.217);
+         margin-left: 20px;
+         border-radius: 0px 0px 0px 10px;
+    }
+    .comment-name{
+        color: black;
+    }
+    .replaybtn{
+        cursor: pointer;
+    }
+
+    .replaybtn:hover{
+        color: var(--secondary);
+        font-weight: 700;
+    }
+</style>
+{%with depth=depth|add:"1" %}
+
+
+
+
+{%for comment in comments%}
+<div class="mt-2 single_comment_box" style="">
+
+
+
+
+
+
+
+    <div class="card-body">
+        <span class="comment-name">
+
+            <strong>
+                {{comment.username}}, 
+            </strong>
+            <small>{{comment.created|timesince}} ago</small>
+        </span>
+
+        <p class="rounded-7 w-sm-100p w-lg-40p " style="background-color: rgba(171, 171, 171, 0.217); padding: 2%; ">
+
+
+            {{comment.message}}
+
+        </p>
+        
+        
+
+
+    </div>
+
+
+    {% with filename="core/components/view_comment.html"   %}
+    {% with comments=comment.replay.all  %}
+    {% include filename %}
+    {% endwith %}
+    {%endwith%}
+
+    <div class="mb-5">
+
+        {%if not depth > 2 %}
+            <div class="mx-3 replaybtn" onclick="replay({{comment.pk}})">
+                replay 
+            </div>
+            
+            <div class="container" id="reply_comment{{comment.pk}}">
+                
+            </div>
+        {%endif%}
+    </div>
+
+
+
+
+</div>
+
+{%endfor%}
+
+{%endwith%}

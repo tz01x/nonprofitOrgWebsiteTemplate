@@ -1,0 +1,89 @@
+{%extends 'core/index.html'%}
+{%load static%}
+{%block metatag%}
+
+<meta name="title" content="Registation form of {{clubinfo.sort_name}}">
+<meta name="description" content="join to {{clubinfo.sort_name}}">
+<meta name="keywords" content="{{clubinfo.sort_name}},lastcoders">
+
+<title>[{{clubinfo.sort_name}}] : JoinUS </title>
+{%endblock%}
+
+{%include 'navbar.html'%}
+
+{%block body%}
+
+    {%include 'navbar.html'%}
+
+
+
+    <h1>Render field manually</h1>
+    <form action="" method="post">
+        {%csrf_token%}
+
+
+
+
+
+        <!-- form.[fieldname] -->
+        <div class="form-control">
+
+
+
+        
+
+            <!-- simple text field  -->
+            <div class="fieldWrapper">
+                {{ form.username.errors }}
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+
+
+            <!-- simple multi select field  -->
+            <div class="fieldWrapper">
+                {{ form.skill.errors }}
+                {{ form.skill.label_tag }}
+
+                {{form.skill.value}}
+
+                {%for val in form.skill.value%}
+
+                {{val}}
+                {%endfor%}
+                
+                <select name="{{form.skill.name}}" id="" multiple>
+                    {%for choice in form.skill.field.widget.choices%}   
+
+
+                    {%if choice.0 in form.skill.value %}
+                    <option value="{{choice.0}}"  selected >{{choice.1}}</option>
+                    {%else%}
+                    <option value="{{choice.0}}"   >{{choice.1}}</option>
+
+                    {%endif%}
+
+
+
+
+                    {%endfor%}
+
+                </select>
+                
+            </div>
+
+
+        </div>
+      
+
+        <input type="submit" class="btn btn-primary" value="submit">
+
+       
+    </form>
+
+
+
+   
+   
+{%endblock%}
+

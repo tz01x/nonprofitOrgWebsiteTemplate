@@ -1,0 +1,13 @@
+# active env 
+
+cd ..
+.\env\Scripts\activate
+cd .\robotic_club\
+
+# runserver 
+
+python manage.py runserver
+
+# run livereload
+
+python manage.py livereload

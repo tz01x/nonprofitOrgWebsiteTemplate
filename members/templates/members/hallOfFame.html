@@ -1,0 +1,336 @@
+{%extends 'core/index.html'%}
+{%load static%}
+
+{%block metatag%}
+
+<meta pagename="hallOfFame.html">
+
+
+<!-- hallOfFame.html -->
+<meta name="title" content=" Alumni - {{clubinfo.sort_name}}">
+<meta name="description" content="  Our Alumni ">
+
+
+
+<meta property="og:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+<meta property="og:title" content="Alumni - {{clubinfo.sort_name}}">
+<meta property="og:description" content=" Our Alumni ">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alumni - {{clubinfo.sort_name}}">
+<meta name="twitter:description" content=" Our Alumni ">
+<meta name="twitter:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+
+<title>Alumni - {{clubinfo.sort_name}} </title>
+
+{%endblock%}
+
+
+{%block body%}
+
+
+<style>
+  .row {
+    --bs-gutter-x: 0;
+  }
+ 
+
+
+  .mtbr-2 {
+    margin-top: 0.5rem !important;
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .socal {
+    transform: translateY(0);
+    transition: transform 200ms ease-in;
+  }
+
+  .socal:hover {
+    transform: translateY(-4px);
+
+
+  }
+
+  /*
+ *  STYLE 1
+ */
+
+  #style-1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(65, 76, 139, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  #style-1::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+  }
+
+  #style-1::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.555);
+    background-color: var(--primary);
+  }
+
+  .hover-zoom {
+    overflow: hidden;
+
+
+  }
+
+  .hover-zoom img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+
+    transform: scale(1);
+    transition: transform 500ms;
+  }
+
+  .hover-zoom img:hover {
+    transform: scale(1.1);
+  }
+
+  .current_semester {
+
+    cursor: pointer;
+  }
+
+  .about-arrow {
+
+    transform: scale(0) translateX(-20px);
+
+    transition: transform 200ms ease-in;
+    transform-origin: left;
+
+  }
+
+  .member-about-btn:hover .about-arrow {
+
+    transform: scale(1) translateX(5px);
+
+  }
+
+
+  @keyframes fadeup {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  .font-40 {
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 47px;
+
+        color: #000000;
+    }
+
+
+</style>
+{%with banner_title="Alumni"%}
+{%include 'lending_pic.html'%}
+{%endwith%}
+
+
+<div class=" mt-4">
+
+
+
+  <section class=" order-last order-lg-first " id="style-1" style="min-height: 100vh">
+
+    <h1 class="text-center  mb-5 d-none">
+      Alumni
+    </h1>
+
+
+
+
+
+
+
+
+
+
+
+    <div class=" row   justify-content-evenly  " style="    max-width: 1472px;margin: auto;">
+
+
+
+
+      {%for member in objects%}
+      <div class="col-sm-12 col-lg-4 mx-0 mx-lg-2 mb-3 shadow-2" data-aos="fade-in" data-aos-duration="4000"
+        style="box-shadow: -1px 1px 7px -4px #000000a8; max-width: 400px;max-height: 250px;">
+        <div class="card " style="height: 100%;">
+          <div class="row g-0  " style="height: 100%;">
+            <div class="col-6 col-sm-6 d-flex bg-image hover-zoom " style="height: 100%;">
+              {%if member.picture%}
+              <img src="{%if member.picture%} {{member.picture.url}} {%endif%}" class="img-fluid " alt="...">
+              {%else%}
+              <img src="" class="img-fluid rounded-start" alt="...">
+
+              {%endif%}
+            </div>
+            <div class="col-6 col-sm-6 ">
+              <div class="d-flex flex-column justify-content-between" style="padding-left: 20px;height: 100%;">
+                <div class="d-flex justify-content-lg-between flex-column">
+                  <h6 class="card-title text-capitalize fs-6  fs-lg-5 mt-4">{{member.name}}</h6>
+                  <p class="card-text fw-bold">Alumni</p>
+                  <div>
+                    <!-- Button trigger modal -->
+                    <span role="button" class="member-about-btn d-flex" data-bs-toggle="modal"
+                      data-bs-target="#modal{{member.id}}">
+                      About
+                      <div class="about-arrow">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                          <path
+                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+
+                      </div>
+                    </span>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal{{member.id}}" tabindex="-1" aria-labelledby="modalLable"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalLable">About {{member.name}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            {{member.discription|safe}}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="d-flex">
+                  <a href="{{member.facebook_profile_url}}"
+                    class="socal socal-facebook border-primary border-1  border-dark  p-2  mtbr-2 rounded-2 text-white"
+                    style="background-color: #033e97; ">
+                    <!-- facebook -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                      class="bi bi-facebook" viewBox="0 0 16 16">
+                      <path
+                        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                    </svg>
+
+                  </a>
+
+                  <a href="{{member.linkin_url}}"
+                    class="socal border-primary border-1 bg-primary  p-2  mtbr-2 rounded-1 text-white">
+                    <!-- linkind -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                      class="bi bi-linkedin" viewBox="0 0 16 16">
+                      <path
+                        d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                    </svg>
+
+                  </a>
+
+                  <a href="mailto:{{member.email}}?subject=hello"
+                    class="socal border-primary border-1 bg-secondary  p-2 mtbr-2 rounded-1 text-white">
+                    <!-- email -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                      class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                    </svg>
+
+                  </a>
+
+
+
+
+
+
+
+
+
+                </div>
+                <!-- <p class="card-text"><small class="text-muted">join {{member.joined}}</small></p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%empty%}
+      <div class="container px-5">
+        <h5>
+          No Members found
+        </h5>
+      </div>
+
+      {%endfor%}
+
+    </div>
+
+
+
+
+
+
+  </section>
+
+
+</div>
+
+
+
+<div class="mb-8">
+
+
+
+</div>
+
+<script>
+
+  function onchangeHendeler2() {
+
+
+    ele = document.getElementById('changesemester2');
+
+    // console.log(ele.value);
+
+    window.location.href = window.location.origin + ele.value;
+
+
+
+  }
+
+
+  function onchangeHendeler1() {
+
+
+    ele = document.getElementById('changesemester1');
+
+    // console.log(ele.value);
+
+    window.location.href = window.location.origin + ele.value;
+
+
+
+  }
+</script>
+
+{%endblock body%}

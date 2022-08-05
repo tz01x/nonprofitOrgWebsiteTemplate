@@ -1,0 +1,332 @@
+{%extends 'core/index.html'%}
+{%load static%}
+{%include 'navbar.html'%}
+
+
+
+{%block metatag%}
+
+
+<title>{{clubinfo.sort_name}} : Gallery  </title>
+{{ block.super }}
+
+{%endblock%}
+
+{%block body%}
+
+<link rel="stylesheet" href="/static/css/photoswipe.css" />
+
+<style>
+    .pswp__custom-caption {
+        background: var(--secondary);
+        font-size: 16px;
+        color: var(--text_in_secondary) !important;
+        width: calc(100% - 32px);
+        max-width: 400px;
+        padding: 2px 8px;
+        border-radius: 4px;
+
+        position: absolute;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
+    }
+
+    .pswp__custom-caption a {
+        color:  var(--text_in_secondary) !important;
+        text-decoration: underline;
+    }
+
+    .hidden-caption-content {
+        display: none;
+    }
+
+
+
+    .gallery {
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 300px 300px;
+        grid-gap: 10px;
+        grid-auto-flow: dense;
+    }
+
+    .col-span-1 {
+        grid-column: span 1;
+    }
+
+    .col-span-2 {
+        grid-column: span 2;
+    }
+
+    .col-span-3 {
+        grid-column: span 3;
+    }
+
+    .row-span-1 {
+        grid-row: span 1;
+    }
+
+    .row-span-2 {
+        grid-row: span 2;
+    }
+
+    .row-span-3 {
+        grid-row: span 3;
+    }
+
+    .pswp-gallery__item {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pswp-gallery__item a {
+        width: 100%;
+        height: 100%;
+
+    }
+
+
+    .pswp-gallery__item a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+        cursor: pointer;
+
+        transition: .3s ease-in-out;
+    }
+
+    .pswp-gallery__item:hover a img {
+        transform: scale(1.05);
+    }
+
+    @media screen and (max-width:760px) {
+
+        .gallery {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 200px 200px;
+
+        }
+
+    }
+
+    .h-100vh {
+        min-height: 100vh !important;
+    }
+
+    
+</style>
+
+
+{%with banner_title="Gallery" object_list=semesters selector=curr_semester_slug url_path="/gallery/"%}
+{%include 'lending_pic_with_list_obj.html'%}
+{%endwith%}
+
+<div class="text-center">
+    <h2 class="text-center  d-sm-none mt-2">
+        Gallery
+    </h2>
+
+    <!-- <small class="d-sm-none">form</small> -->
+    
+    <div class="container d-flex justify-content-center d-sm-none  ">
+        <form class="w-sm-40p w-lg-25p " action="" method="get">
+          <select class="form-select text-center" name="" id="changesemester1" onchange="onchangeHendeler1()">
+            {%for semester in semesters%}
+  
+            <option value="{{semester.slug }}" {%if semester.slug == curr_semester_slug %} selected {%endif%}> {{semester}} </option>
+            {%empty%}
+            <option value=""></option>
+            {%endfor%}
+          </select>
+        </form>
+      </div>
+
+</div>
+
+
+<div class="container my-5 h-100vh ">
+
+
+
+
+    <div class="pswp-gallery pswp-gallery--with-caption  gallery " id="gallery--with-custom-caption">
+        <!-- <div class="pswp-gallery__item ">
+            <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669"
+                data-pswp-height="2500" target="_blank">
+                <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt="Caption 1" />
+            </a>
+    
+        </div> -->
+
+
+
+       
+
+
+
+
+
+
+    </div>
+    <!---end galary -->
+
+    <button class="btn btn-floating primary-btn  mt-5 " onclick="loadMore(this)">load more</button>
+</div>
+
+
+
+<script type="module">
+    // Include Lightbox 
+    import PhotoSwipeLightbox from '/static/js/photoswipe-lightbox.esm.js';
+
+    const lightbox = new PhotoSwipeLightbox({
+        // may select multiple "galleries"
+        gallery: '#gallery--with-custom-caption',
+
+        // Elements within gallery (slides)
+        children: 'a',
+
+        // Include PhotoSwipe Core
+        // and use absolute path (that starts with http(s)://)
+        pswpModule: '/static/js/photoswipe.esm.js'
+    });
+
+
+
+    lightbox.on('uiRegister', function () {
+        lightbox.pswp.ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            html: 'Caption text',
+            onInit: (el, pswp) => {
+                lightbox.pswp.on('change', () => {
+                    const currSlideElement = lightbox.pswp.currSlide.data.element;
+                    let captionHTML = '';
+                    if (currSlideElement) {
+                        const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
+                        if (hiddenCaption) {
+                            // get caption from element with class hidden-caption-content
+                            captionHTML = hiddenCaption.innerHTML;
+                        } else {
+                            // get caption from alt attribute
+                            captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
+                        }
+                    }
+                    el.innerHTML = captionHTML || '';
+                });
+            }
+        });
+    });
+
+
+    lightbox.init();
+
+
+
+</script>
+
+
+
+<script>
+
+    let nextpageurl = null;
+
+    function loadMore(btnEle) {
+
+        if (nextpageurl != null) {
+
+            fetchImages(nextpageurl);
+
+        }
+
+        // console.log(nextpageurl);
+
+
+    }
+
+    function onchangeHendeler1(){
+        ele = document.getElementById('changesemester1');
+        window.location.href = window.location.origin+'/gallery/' + ele.value+"/";
+        // console.log(w)
+    }
+   
+
+
+
+
+    function fetchImages(url = window.location.origin + '/api/gallery/{{curr_semester_slug}}/') {
+
+        fetch(url).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+
+                throw (`[${res.status}] ${res.statusText}. ` + 'OPPS!!, someting want wrong in api call pls visite us, later');
+            }
+        }).then(data => {
+
+            processData(data);
+
+
+        }).catch(e => {
+            alert(e);
+        })
+    }
+
+
+    function processData(data) {
+        //console.log(data);
+        const { count, next, results } = data;
+
+        nextpageurl = next;
+
+        results.map(item => {
+            let { title, url, images } = item;
+            // console.log(title, url);
+            let counter=1;
+            images.map((imgobj,idx) => {
+                let { img, width, height } = imgobj;
+
+                let galerry = document.getElementById('gallery--with-custom-caption');
+                
+                galerry.innerHTML += `
+
+                    <div class="pswp-gallery__item " data-aos="fade-up" data-aos-delay="${300*counter}">
+                        <a href="${img}" data-pswp-width="${width}"
+                            data-pswp-height="${height}" target="_blank">
+                            <img src="${img}" alt="${title}  <a href='${url}' >link </a> " />
+                        </a>
+                        
+                    </div>
+
+
+                    `;
+
+                    
+
+                    counter= ((counter%3)+1);
+
+                    console.log(counter);
+            });
+
+
+        })
+
+
+
+    }
+
+
+
+
+    fetchImages(window.location.origin + '/api/gallery/{{curr_semester_slug}}');
+</script>
+
+{%endblock%}

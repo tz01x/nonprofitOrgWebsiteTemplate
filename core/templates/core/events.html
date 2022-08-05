@@ -1,0 +1,261 @@
+{%extends 'core/index.html'%}
+{%load static%}
+{%block metatag%}
+
+<!-- events.html -->
+<title>{{activitys_name}} - {{clubinfo.sort_name}}</title>
+<meta name="title" content="{{activitys_name}} - {{clubinfo.sort_name}}">
+<meta name="description" content="Find out latest {{activitys_name}}.">
+
+
+
+<meta property="og:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+<meta property="og:title" content="{{activitys_name}} - {{clubinfo.sort_name}}">
+<meta property="og:description" content="Find out latest {{activitys_name}}.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{activitys_name}} - {{clubinfo.sort_name}}">
+<meta name="twitter:description" content="Find out latest {{activitys_name}}.">
+<meta name="twitter:image" content="{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%endif%}">
+
+
+{%endblock%}
+{%block body%}
+<style>
+
+
+    .leadingImage-text {
+        font-family: var(--font_family);
+        color: white;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 59px;
+        letter-spacing: 0em;
+        text-align: left;
+
+        padding-top: 4%;
+
+    }
+
+    /* font */
+    .font-40 {
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 47px;
+
+        color: #000000;
+    }
+
+    .font-35 {
+        font-family: var(--font_family);
+        font-style: normal;
+
+        font-size: 35px;
+    }
+
+    .font-18 {
+        font-family: var(--font_family);
+        font-style: normal;
+
+        font-size: 18px;
+    }
+
+    .font-cb {
+        color: #000000;
+    }
+
+    .font-cw {
+        color: white;
+    }
+
+    .font-wB-lh47 {
+        font-weight: bold;
+        line-height: 47px;
+    }
+
+    .font-wB-lh29 {
+        font-weight: bold;
+        line-height: 29px;
+    }
+
+    .font-w500-lh47 {
+        font-weight: 500;
+        line-height: 47px;
+    }
+
+    .font-w500-lh21 {
+        font-weight: 500;
+        line-height: 21px;
+    }
+
+    /* font */
+    .pdd-lr {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+
+    .c-img img {
+        width: 278px;
+        height: 208px;
+    }
+    .card-title{
+        font-size: 1.7rem;
+    }
+    .c-header {
+        font-family: var(--font_family);
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        /* color: #000000; */
+        white-space: pre-wrap;
+    }
+
+    .card-text {
+        font-family: var(--font_family);
+        font-size: 1.2rem;
+
+
+    }
+
+    .c-btn {
+        width: 102px;
+        height: 30px;
+        color: var(--text_in_primary);
+        padding-top: 3px;
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+
+
+    
+  
+
+ 
+</style>
+
+{%with banner_title=activitys_name%}
+{%include 'lending_pic.html'%}
+{%endwith%}
+
+
+
+
+
+<section class="recent-post container mb-5">
+
+    <div class="recent-post-h1  fs-4 fs-lg-3  font-cb font-w500-lh47 mt-3 ">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="d-none" style=" border-bottom: 0.5px solid #353535; padding-bottom: 3px;"> {{activitys_name}}</h1>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        
+    </div>
+    <div class="row">
+        
+        <!-- post -->
+        <div class="col-lg-8">
+           
+            {% for object in object_list %}
+
+            <!--  posts iterms  -->
+            <div class="row align-items-center mt-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-sm-4 ">
+                    <!-- <img src="{%static 'img/Rectangle 150.svg'%}" alt="card-img" srcset=""> -->
+                    <div title="{{object.title}}" style="
+                    background-image: url({%if object.picture %} {{object.picture.url}}{%endif %});   
+                    height: 10em;
+                    background-size: cover;
+                    border-radius: 6px;
+                    
+                    background-position:center;
+                    
+                    ">
+                    </div>
+                </div>
+                <div class="col-sm-8 c-main">
+                    <div class="news-date">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                            class="bi bi-calendar-week" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                        <small>
+                            {{object.created}}
+                        </small>
+                    </div>
+                    <h2 class="card-title">{{object.title}}</h2>
+                    
+                    <p class="card-text " style=" word-break: break-word;">
+                        {{object.shortDescription}}
+                    </p>
+                    <div class="c-footer">
+                        <a href="{{object.get_absolute_url}}" aria-label="link to read more About {{object.title}}" title="Read More About {{object.title}}">
+                            <div class="c-btn primary-btn text-center" >Read More</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- post iteams end -->
+            {%empty%}
+            <h5>
+                No Data Found.
+            </h5>
+
+            {% endfor %}
+
+            {% if object_list.has_other_pages %}
+            <nav aria-label="Page navigation "></nav>
+            <ul class="pagination ">
+                {% if object_list.has_previous %}
+                <li class="page-item"><a class="page-link" aria-label="link back to previous page " href="?page={{ object_list.previous_page_number }}"
+                        tabindex="-1">Previous</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                {% endif %}
+                {% for i in object_list.paginator.page_range %}
+                {% if object_list.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only"></span> </span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" aria-label="link to page {{ i }}" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if object_list.has_next %}
+                <li class="page-item"><a class="page-link" aria-label="link to next page"  href="?page={{ object_list.next_page_number }}">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
+                {% endif %}
+            </ul>
+            </nav>
+            {% endif %}
+
+
+        </div>
+        <!-- post end -->
+        <!-- side bar  -->
+        <div class="col-lg-4 mt-5 mt-lg-0 " style="overflow: hidden;">
+
+            {%include 'core/components/newsletter.html'%}
+            {%include 'core/components/follow-socal-link.html'%}
+            {%include 'core/components/top_post.html'%}
+
+          
+
+
+        </div>
+        <!-- side bar end -->
+    </div>
+
+</section>
+
+
+{%endblock body%}

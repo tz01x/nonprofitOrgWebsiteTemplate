@@ -1,0 +1,111 @@
+{%load static%}
+
+<style>
+    .intro-pics {
+
+        /* margin-top: 2%; */
+
+        background: url('{% if clubinfo.landing_picture %}{{clubinfo.landing_picture.url}}{%else%} {%static "img/2_35__1.png"%} {%endif%}  ');
+        /* width: 101%; */
+        height: 30vh;
+        /* aspect-ratio: 2.35/1; */
+
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+        position: relative;
+
+
+
+
+    }
+
+    .banner_title {
+        position: relative;
+        top: 50%;
+        left: 5%;
+        font-size: 3rem;
+        font-weight: bolder;
+        
+        color: white;
+        text-shadow: -1px 1px 2px black;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .intro-pics {
+            object-fit: contain;
+            height: 30vh;
+
+            margin-top: 0;
+
+        }
+
+        .banner_title {
+            font-size: 2.2rem;
+            
+        }
+
+    }
+
+    /*Big smartphones [426px -> 600px]*/
+    @media only screen and (max-width: 576px) {
+
+        .intro-pics {
+            object-fit: contain;
+            height: 15vh;
+            margin-top: 0;
+
+        }
+
+        .banner_title {
+            top: 30%;
+            font-size: 1.8rem;
+        }
+
+    }
+
+    @media only screen and (max-width: 320px) {
+
+        .banner_title {
+ 
+            font-size: 1.5rem;
+        }
+    }
+
+    .catagory_btn{
+        /* background-color: var(--secondary); */
+        border-radius: 35px;
+        box-shadow: -1px 1px 4px 0px #00000079;
+        text-shadow: -1px 1px 4px 0px #00000079;
+        border: 2px solid white;
+        min-height: 38px;
+        width: 150px;
+    }
+    .catagory_btn:active{
+        /* background-color: var(--secondary_liter); */
+        box-shadow: -1px 1px 4px -1px #00000079;
+    }
+    .catagories{
+        position: relative;
+    top: 60%;
+    }
+</style>
+
+
+<div class="intro-pics ">
+
+    {%if banner_title%}
+    <div class="" style="background: black;height: 100%;position: absolute;top: 0;left: 0;width: 100%;opacity: 0.5; "></div>
+    <span class="banner_title container">{{banner_title}}</span>
+    {%endif%}
+
+</div>
+
+
+
+
+
+
+

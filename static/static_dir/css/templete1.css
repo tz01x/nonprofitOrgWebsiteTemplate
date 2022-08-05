@@ -1,0 +1,48 @@
+.login-form .info-bottom a,
+.login-form-box .btn-link,
+.modal-bx-info .btn-link {
+  color: #1c75bc;
+}
+.dlab-login .login-form-box {
+  background-color: #fff;
+}
+.dlab-login .login-form .tab-content > .active {
+  width: 100%;
+}
+.dlab-login .login-form .tab-content {
+  align-items: center;
+  width: 100%;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+.dlab-login .login-form {
+  z-index: 99;
+  padding: 0 20px 0 50px;
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-form .form-title {
+  font-size: 26px;
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 30px;
+}
+.login-form .form-group {
+  margin-bottom: 15px;
+}
+.login-form .form-control,
+.add-listing-form .form-control,
+.add-listing-form .dropdown-toggle.btn-default {
+  border: 1px solid #e7e7ed;
+  padding: 6px 30px 6px 15px;
+  height: 45px;
+  border-radius: 4px;
+  color: #70778b;
+  font-size: 15px;
+  font-family: Roboto, sans-serif;
+}

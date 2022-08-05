@@ -1,0 +1,68 @@
+<style>
+
+    /* news letter  */
+
+    .slide-header-txt {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 34px;
+
+        text-transform: uppercase;
+
+        color: #000000;
+    }
+
+    
+.news-letter form {
+        width: 100%;
+        height: 63px;
+
+        border: 1px solid #C4C4C4;
+        box-sizing: border-box;
+        border-radius: 88px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .news-letter>form>input[type=email]:nth-child(1) {
+        border: 0px solid #8482823b;
+        height: 42px;
+        border-radius: 20px;
+        margin-left: 14px;
+        width: 66%;
+        text-align: center;
+
+    }
+
+    input[type=email]:nth-child(1):focus {
+        border-radius: 20px;
+    }
+
+    .news-letter>form>input[type=submit]:nth-child(2) {
+
+        max-width: 152px;
+        min-width: 102px;
+        height: 50px;
+
+        border: 0;
+        background: var(--primary);
+        border-radius: 88px;
+        color:var(--text_in_primary);
+        margin-right: 7px;
+    }
+
+
+
+</style>
+
+<div class="news-letter">
+    <p class="slide-header-txt">NEWSLETTER</p>
+    <form aria-label="newsletter form" action="{%url 'core:newsletter_sub'%}" method="post">
+        <input type="email" name="email" id="" aria-label="Enter email" aria-required="true" placeholder="Enter your mail" required>
+        <input type="submit" class="font-cw" aria-label="subscribe" value="Subscribe">
+        <input type="hidden" name="next" value="{{request.path}}">
+        {%csrf_token%}
+    </form>
+</div>
